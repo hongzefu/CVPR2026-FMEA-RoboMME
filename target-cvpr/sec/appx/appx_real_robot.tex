@@ -2,12 +2,19 @@
 \section{Real Robot Experiment}
 \label{sec:appx_real_robot}
 
-\begin{figure*}
+\begin{figure*}[t]
     \centering
     \includegraphics[width=\linewidth]{images/real_world_tasks.pdf}
     \caption{We design four history-dependent real-world tasks for policy evaluation. The upper dashed box indicate selected frames from previous video history. The bottom large box indicate current observation for execution.}
     \label{fig:real_robot}
 \end{figure*}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/real_robot_setup.png}
+    \caption{Real Robot Experiment Platform Setup.}
+    \label{fig:platform}
+\end{figure}
 
 We design four real-world tasks (Figure~\ref{fig:real_robot}), \textit{PutFruits}, \textit{TrackCube}, \textit{RepickBlock}, and \textit{DrawPattern}, to mirror four simulation tasks, \textit{BinFill}, \textit{VideoUnmask(Swap)}, \textit{VideoRepick}, and \textit{PatternLock}, respectively.
 \begin{itemize}
@@ -28,13 +35,6 @@ Figure~\ref{fig:platform} illustrates the platform setup. Experiments are conduc
 For training, we evaluate our strongest perceptual model (\textsc{FrameSamp}+\texttt{Modul}), symbolic model (\textsc{GroundSG}+\texttt{QwenVL}), and the $\pi_{0.5}$ baseline for comparison. We adopt a larger memory budget of $B=2048$, as simulation experiments showed only modest additional computational cost. We use the right-shoulder view image for the VLM subgoal predictor and memory contruction.
 \texttt{QwenVL} is trained using the same configuration as in simulation. The subgoal annotation for \textit{PutFruits} and \textit{DrawPattern} tasks does not contain grounding information.
 All other hyperparameters remain unchanged, except that we set the total number of training steps to 50k.
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/real_robot_setup.png}
-    \caption{Real Robot Experiment Platform Setup.}
-    \label{fig:platform}
-\end{figure}
 
 \begin{table}[t]
     \centering
