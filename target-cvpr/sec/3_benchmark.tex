@@ -137,9 +137,7 @@ Annotations indicate the availability of language-based subgoals or keyframe tim
 \input{tables/benchmark_comparsion}
 
 
-The aim of \benchname\xspace is to rigorously evaluate history-dependent behavior in robotic manipulation.
-All tasks are intentionally constructed to be non-Markovian, requiring models to reason over past observations that are no longer visible at the current step.
-Memory is essential for these tasks because identical observations can arise from different histories yet require different actions.
+All tasks in \benchname\xspace are non-Markovian by design: identical observations may arise from different histories and require different actions.
 
 
 
@@ -157,13 +155,7 @@ To systematically evaluate history-dependent, long-horizon manipulation, we grou
 
 \end{itemize}
 
-These four memory types correspond to the cognitive dimensions of when (temporal), where (spatial), what (object), and how (procedural).
-\benchname\xspace is organized around these dimensions into four task suites, \TSone, \TStwo, \TSthree, \TSfour, each emphasizing a primary memory type for controlled evaluation. \cref{fig:teaser} illustrates an overview of \benchname. Specifically, the \TSone\xspace suite targets \textit{temporal memory} by requiring agents to repeat actions a specified number of times, including pick-and-place, linear swinging, and time-critical  tasks.
-The \TStwo\xspace suite focuses on \textit{spatial memory}, evaluating object location tracking from pre-recorded videos or during concurrent manipulation.
-The \TSthree\xspace suite evaluates \textit{object memory} through persistent identity resolution under visual, action-based, and language-based referential cues.
-The \TSfour\xspace suite targets \textit{procedural memory} by requiring agents to reproduce demonstrated motion patterns, such as pushing, inserting, and sequential linear or circular motions.
-Together, these suites provide a complementary evaluation of memory-augmented manipulation across diverse memory demands.
-\cref{tab:task_overview} summarizes the tasks, with detailed descriptions in \cref{sec:appx_task_desc}.
+\benchname\xspace organizes these four dimensions into task suites \TSone, \TStwo, \TSthree, and \TSfour; \cref{tab:task_overview} and \cref{fig:teaser} summarize all tasks, with detailed descriptions in \cref{sec:appx_task_desc}.
 
 
 \begin{figure*}[t]
