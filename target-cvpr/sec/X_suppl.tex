@@ -2,16 +2,76 @@
 \setcounter{page}{1}
 \maketitlesupplementary
 
+\appendix
 
-\section{Rationale}
-\label{sec:rationale}
-% 
-Having the supplementary compiled together with the main paper means that:
-% 
+\section*{Appendix Outline}
 \begin{itemize}
-\item The supplementary can back-reference sections of the main paper, for example, we can refer to \cref{sec:intro};
-\item The main paper can forward reference sub-sections within the supplementary explicitly (e.g. referring to a particular experiment); 
-\item When submitted to arXiv, the supplementary will already included at the end of the paper.
+
+\item \ref{sec:appx_model_design}. Model Architectures in the MME-VLA Suite
+    \begin{itemize}
+      \item \ref{sec:pi05}. Basic $\pi_{0.5}$ Architecture
+      \item \ref{sec:memory_repr}. Memory Representations
+      \item \ref{sec:memory_integration}. Memory Integration Mechanisms
+    \end{itemize}
+
+\item \ref{sec:appx_imp_detail}. Experiment Implementation Details on \benchname
+    \begin{itemize}
+        \item \ref{sec:sam2act}. Training Details for SAM2Act+
+        \item \ref{sec:VLM_subgoal}. VLM Subgoal Prediction and Prompts
+        \item \ref{sec:mme_vla_model}. Detailed Setups in \modelname\xspace Suite
+        \item \ref{sec:hyperpara}. Training Hyperparameters
+        \item \ref{sec:human}. Oracle Planner and Human Study
+    \end{itemize}
+\item \ref{sec:appx_full_results}. Full Results on \benchname
+    \begin{itemize}
+        \item \ref{sec:results_oracle_planner}. Results Using the Oracle Planner
+        \item \ref{sec:results_suite_breakdown}. Results Based on Each Task Suite
+        \item \ref{sec:result_task_function}. Results Based on Task Functional Requirements
+        \item \ref{sec:results_all_tasks}. Full Results on All Tasks
+    \end{itemize}
+\item \ref{sec:appx_real_robot}. Real Robot Experiment Details.
+
+\item \ref{sec:appx_task_desc}. Complete Task Description
+  \begin{itemize}
+      \item Task Suite \TSone
+        \begin{itemize}
+          \item \ref{sec:task_binfill}. BinFill
+          \item \ref{sec:task_pickxtimes}. PickXtimes
+          \item \ref{sec:task_swingxtimes}. SwingXtimes
+          \item \ref{sec:task_stopcube}. StopCube
+      \end{itemize}
+      \item Task Suite: \TStwo
+        \begin{itemize}
+              \item \ref{sec:task_videounmask}. VideoUnmask
+              \item \ref{sec:task_buttonunmask}. ButtonUnmask
+              \item \ref{sec:task_videounmaskswap}. VideoUnmaskSwap
+              \item \ref{sec:task_buttonunmaskswap}. ButtonUnmaskSwap
+        \end{itemize}
+    \item Task Suite: \TSthree
+        \begin{itemize}
+         \item \ref{sec:task_pickhighlight}. PickHighlight
+          \item \ref{sec:task_videorepick}. VideoRepick
+          \item \ref{sec:task_videoplacebutton}. VideoPlaceButton
+         \item \ref{sec:task_videoplaceorder}. VideoPlaceOrder
+    \end{itemize}
+    \item Task Suite: \TSfour
+        \begin{itemize}
+             \item \ref{sec:task_movecube}. MoveCube
+              \item \ref{sec:task_insertpeg}. InsertPeg
+              \item \ref{sec:task_patternlock}. PatternLock
+              \item \ref{sec:task_routestick}. RouteStick
+        \end{itemize}
+
+    \end{itemize}
 \end{itemize}
-% 
-To split the supplementary pages from the main paper, you can use \href{https://support.apple.com/en-ca/guide/preview/prvw11793/mac#:~:text=Delete%20a%20page%20from%20a,or%20choose%20Edit%20%3E%20Delete).}{Preview (on macOS)}, \href{https://www.adobe.com/acrobat/how-to/delete-pages-from-pdf.html#:~:text=Choose%20%E2%80%9CTools%E2%80%9D%20%3E%20%E2%80%9COrganize,or%20pages%20from%20the%20file.}{Adobe Acrobat} (on all OSs), as well as \href{https://superuser.com/questions/517986/is-it-possible-to-delete-some-pages-of-a-pdf-document}{command line tools}.
+
+
+\input{sec/appx/appx_model_design}
+
+\input{sec/appx/appx_imp_detail}
+
+\input{sec/appx/appx_full_result}
+
+\input{sec/appx/appx_real_robot}
+
+\input{sec/appx/appx_task_desc}
