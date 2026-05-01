@@ -14,8 +14,11 @@
 \def\confName{CVPR}
 \def\confYear{2026}
 
-% Override cvpr.sty's \maketitlesupplementary which uses \twocolumn[...]
-% to force single-column layout throughout the supplementary material.
+% The supplementary is compiled as a SEPARATE single-column document because
+% several appendix tables are too wide for the CVPR two-column layout.
+% Override \maketitlesupplementary (which calls \twocolumn[...] in cvpr.sty)
+% to keep the document single-column. Review-mode line numbers remain enabled
+% so reviewers can reference lines in the supplementary.
 \renewcommand{\maketitlesupplementary}{%
   \newpage
   \begin{center}
@@ -27,7 +30,6 @@
 \title{\benchname: Benchmarking and Understanding Memory for Robotic Generalist Policies}
 
 \begin{document}
-\nolinenumbers
 \input{sec/X_suppl}
 
 {

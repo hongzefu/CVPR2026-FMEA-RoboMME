@@ -10,6 +10,10 @@
 \newcommand{\red}[1]{{\color{red}#1}}
 \newcommand{\todo}[1]{{\color{red}#1}}
 \newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
+%% Disabled for blind-review submission: keep TODO/todo silent in case any
+%% accidental call survives in the source tree.
+\renewcommand{\TODO}[1]{}
+\renewcommand{\todo}[1]{#1}
 
 %%
 %% Math / typesetting packages
