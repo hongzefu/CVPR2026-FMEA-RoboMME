@@ -30,7 +30,6 @@ Our code for adapting SAM2Act+ can be found at \url{https://github.com/RoboMME/S
 \small
 \caption{Training hyperparameters for SAM2Act and SAM2Act+.}
 \label{tab:sam2actplus_train_hparams}
-\resizebox{\linewidth}{!}{%
 \begin{tabular}{lcc}
 \toprule
 \textbf{Hyperparameters} & \textbf{SAM2Act Training} & \textbf{SAM2Act+ Training} \\
@@ -46,7 +45,7 @@ training epochs & 10 & 10 \\
 LoRA rank & 16 & 16 \\
 data distribution & task uniform & demo uniform temporal\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 
 
@@ -82,8 +81,9 @@ DeepSpeed & ZeRO-2 \\
 
 Figures~\ref{fig:simple_prompt} and~\ref{fig:grounded_prompt} illustrate the training prompts for simple and grounded subgoal prediction, respectively. Since grounded subgoals consistently yield better performance in our experiments, we also modify the MemER\cite{sridhar2025memer} method to predict grounded subgoals using their prompts, as shown in Figure~\ref{fig:memer_prompt}. For each VLM variant, we  use one prompt for multi-task training.
 
+\clearpage
 
-\begin{figure}[t]
+\begin{figure}[!t]
 \centering
 \begin{tcolorbox}[
   enhanced,
@@ -132,7 +132,7 @@ Figures~\ref{fig:simple_prompt} and~\ref{fig:grounded_prompt} illustrate the tra
 
 
 
-\begin{figure}[t]
+\begin{figure}[!t]
 \centering
 \begin{tcolorbox}[
   enhanced,
@@ -296,7 +296,6 @@ We largely follow a unified training recipe across all MME-VLA variants to ensur
 \centering
 \small
 \caption{Training configuration for MME-VLA models.}
-\resizebox{\linewidth}{!}{%
 \begin{tabular}{ll}
 \toprule
 \textbf{Hyperparameter} & \textbf{Value} \\
@@ -318,7 +317,7 @@ Save Interval & 10{,}000 \\
 Frozen Part & SigLIP ViT \\
 FSDP Devices & 4 \\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \label{tab:train_hparams_historypi05}
 \end{table}
 
