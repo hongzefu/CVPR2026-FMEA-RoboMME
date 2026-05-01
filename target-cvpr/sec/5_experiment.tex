@@ -1,9 +1,6 @@
 \section{Experiments}
 \label{sec:experiments}
 
-In this section, we systematically evaluate all \modelname\xspace variants under controlled settings, first outlining the experimental setup and then analyzing the main results.
-
-
 \subsection{Experiment Setup}
 We evaluate a total of 14 VLA policies in the MME-VLA suite, along with 4 prior methods, for a systematic comparison. Implementation details are provided in \cref{sec:appx_imp_detail}.
 
@@ -40,7 +37,7 @@ All prior methods are evaluated over three runs. We leave the inclusion of addit
 \end{itemize}
 
 
-The main results are summarized in \cref{tab:main}; and complete results are provided in \cref{sec:appx_full_results}. We analyze these results by addressing several key research questions below.
+Main results are summarized in \cref{tab:main} (full results in \cref{sec:appx_full_results}); we analyze them through the questions below.
 
 \noindent{\bf \Q: Which memory representations and integration mechanisms yield the strongest performance?}
 Across all MME-VLA variants, \textbf{perceptual memory methods perform best}. In particular, \textsc{FrameSamp}+\texttt{Modul} achieves the highest overall success rate (44.51\%), and most perceptual memory variants outperform the best symbolic and recurrent counterparts. Within perceptual memory, \textsc{TokenDrop} is less effective than \textsc{FrameSamp}, likely because aggressive token pruning removes global spatial context. This loss can degrade performance on tasks such as \textit{StopCube}, which require awareness of object distance and benefit from more holistic views.
