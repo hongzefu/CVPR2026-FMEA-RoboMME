@@ -49,9 +49,7 @@ Detailed descriptions of each task are provided below.
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{BinFill} Task Configuration.}
-    \vspace{-0.2cm}
     \label{tab:binfill_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
    {\resizebox{\linewidth}{!}{
@@ -64,7 +62,6 @@ Detailed descriptions of each task are provided below.
         Hard   & 3 & 10--12 & 2--3 \\
         \bottomrule
     \end{tabular}}}
-    \vspace{-0.5cm}
 \end{wraptable}
 
 
@@ -116,10 +113,8 @@ To introduce dynamic and history-dependent behavior, we consider two settings ra
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
     \centering
     \caption{\textit{PickXtimes} Task Configuration.}
-    \vspace{-0.3cm}
     \label{tab:pickxtimes_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
   {{\resizebox{\linewidth}{!}{
@@ -132,7 +127,6 @@ To introduce dynamic and history-dependent behavior, we consider two settings ra
         Hard   & 3 (2 distractors) & 4--5 \\
         \bottomrule
     \end{tabular}}}}
-    \vspace{-0.5cm}
 \end{wraptable}
 
 The \textit{PickXTimes} task, illustrated in Fig.~\ref{fig:pickxtimes}, evaluates the robot’s ability to perform iterative pick-and-place actions with temporal memory. The robot repeatedly picks up a cube of a specified color, places it on a target, and completes an exact number of cycles before pressing a button to terminate the task.
@@ -144,7 +138,6 @@ Task configurations are summarized in Table~\ref{tab:pickxtimes_difficulty_confi
     \includegraphics[width=0.8\linewidth]{images/tasks/pickxtimes.png}
     \caption{\textbf{PickXtimes Task Example.} In this instance, the goal is to pick up the green cube and place it on the target twice, then press the button to stop.}
     \label{fig:pickxtimes}
-    \vspace{-10pt}
 \end{figure}
 
 
@@ -185,9 +178,7 @@ We define two types of language instructions:
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{SwingXtimes} Task Configuration.}
-    \vspace{-0.3cm}
     \label{tab:swingxtimes_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
  {   {\resizebox{\linewidth}{!}{
@@ -200,7 +191,6 @@ We define two types of language instructions:
         Hard   & 3  (2 distractors) & 3 \\
         \bottomrule
     \end{tabular}}}}
-    \vspace{-10pt}
 \end{wraptable}
 
 The \textit{SwingXtimes} task is  illustrated in Fig.~\ref{fig:swingxtimes}. The robot must pick up a specified colored cube, transport it back and forth between two distinct targets (right-side and left-side) for a specified number of repetitions, and then press a button to stop. 
@@ -212,7 +202,6 @@ The \textit{SwingXtimes} task is  illustrated in Fig.~\ref{fig:swingxtimes}. The
     \includegraphics[width=0.6\linewidth]{images/tasks/swingxtimes.png}
     \caption{\textbf{SwingXtimes Task Example.} In this instance, the goal is pick up the green cube, first move it to the right-side target, then put down the cube on the left-side target (i.e., swing between targets one time), finally press the button to stop. Spatial directions (e.g., left/right) follow the robot base coordinate frame rather than the front camera frame.}
     \label{fig:swingxtimes}
-    \vspace{-10pt}
 \end{figure}
 
 
@@ -251,9 +240,7 @@ We define two types of language instructions with increasing compositional compl
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{StopCube} Task Configuration.}
-    \vspace{-0.2cm}
     \label{tab:stopcube_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
    {\resizebox{\linewidth}{!}{
@@ -266,7 +253,6 @@ We define two types of language instructions with increasing compositional compl
         Hard   & 4--5 & slow/medium/fast \\
         \bottomrule
     \end{tabular}}}
-    \vspace{-10pt}
 \end{wraptable}
 
 
@@ -308,9 +294,7 @@ The environment features a dynamic interaction phase defined by continuous movem
 
 \begin{wraptable}{r}{0.5\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{VideoUnmask} Task Configuration.}
-        \vspace{-0.2cm}
     \label{tab:videounmask_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
     \resizebox{\linewidth}{!}{
@@ -374,10 +358,7 @@ Each episode consists of a \textbf{video phase} followed by an \textbf{execution
 
 \begin{wraptable}{r}{0.5\linewidth}
     \centering
-    \vspace{-0.5cm}
-
     \caption{\textit{ButtonUnmask} Task Configuration.}
-        \vspace{-0.2cm}
     \label{tab:buttonunmask_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
 {\resizebox{\linewidth}{!}{
@@ -443,9 +424,7 @@ We use language instructions with increasing compositional complexity:
 
 \begin{wraptable}{r}{0.6\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{VideoUnmaskSwap} Task Configuration.}
-        \vspace{-0.2cm}
     \label{tab:videounmaskswap_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
     \resizebox{\linewidth}{!}{
@@ -469,11 +448,7 @@ Task configurations are summarized in Table~\ref{tab:videounmaskswap_difficulty_
     \caption{\textbf{VideoUnmaskSwap Task Example.} In this instance, the robot first watches the video, then picks up the container hiding the blue cube, followed by the one hiding the green cube. The video shows that all cubes are being masked by containers,  with some containers swapped between locations. Red-bordered frames denote the video-based initial observations provided before execution.
 }
     \label{fig:videounmaskswap}
-    \vspace{-10pt}
 \end{figure}
-
-
-\vspace{-0.2cm}
 \paragraph{Language Goals}
 We use language instructions with increasing temporal and compositional complexity:
 \begin{enumerate}[itemsep=1pt, topsep=0pt, leftmargin=*]
@@ -514,7 +489,6 @@ Each episode consists of a \textbf{video phase} followed by an \textbf{execution
 
 \begin{wraptable}{r}{0.5\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{ButtonUnmaskSwap} Task Configuration.}
     \label{tab:buttonunmaskswap_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
@@ -528,7 +502,6 @@ Each episode consists of a \textbf{video phase} followed by an \textbf{execution
         Hard   & 4 & 2    & 2--3 & 3 (red, green, blue) \\
         \bottomrule
     \end{tabular}}
-    \vspace{-0.5cm}
 \end{wraptable}
 The \textit{ButtonUnmaskSwap} task (Fig.~\ref{fig:buttonunmaskswap}) evaluates spatial memory under active interaction. The robot must press both buttons during container hiding and swapping, track the container concealing the target cube, and finally lift the correct one.
 Task configurations are summarized in Table~\ref{tab:buttonunmaskswap_difficulty_config}.
@@ -539,8 +512,6 @@ Task configurations are summarized in Table~\ref{tab:buttonunmaskswap_difficulty
     \caption{\textbf{ButtonUnmaskSwap Task Example.} In this instance, the robot first presses both buttons on the table, then picks up the container hiding the green cube, followed by the one hiding the blue cube. During the button presses, all cubes are masked and their locations are swapped.}
     \label{fig:buttonunmaskswap}
 \end{figure}
-
-\vspace{-0.2cm}
 \paragraph{Language Goals}
 We use language instructions with increasing complexity:
 \begin{enumerate}[itemsep=1pt, topsep=0pt, leftmargin=*]
@@ -550,16 +521,12 @@ We use language instructions with increasing complexity:
     \item Pick \textbf{two} specified containers sequentially (order matters) \\
     \textit{e.g., ``First press both buttons on the table, then pick up the container hiding the green cube, and finally pick up the container hiding the red cube.''}
 \end{enumerate}
-
-\vspace{-0.2cm}
 \paragraph{Task Characteristics}
 \begin{itemize}[itemsep=1pt, topsep=0pt, leftmargin=*]
     \item \textbf{Button Pressing:} The robot needs to press both buttons. During the pressing, multiple containers are placed on the table to enclose the cubes, after which the some containers swap positions. 
     
     \item \textbf{Unmasking:} The robot must pick up the container(s) hiding the specified cube color(s) described in the language instruction, following the same order when multiple pickups are required.
 \end{itemize}
-
-\vspace{-0.2cm}
 \paragraph{Success Criteria}
 \begin{itemize}[itemsep=1pt, topsep=0pt, leftmargin=*]
     \item \textbf{Correct completion:} The robot presses both buttons and picks up all specified containers at least once, following the required order.
@@ -581,7 +548,6 @@ We use language instructions with increasing complexity:
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{PickHighlight} Task Configuration.}
     \label{tab:pickhighlight_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
@@ -638,9 +604,7 @@ The task involves a multi-stage sequential command: Press button, memorize, and 
 
 \begin{wraptable}{r}{0.5\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{VideoRepick} Task Configuration.}
-        \vspace{-0.2cm}
     \label{tab:videorepick_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
     \resizebox{1\linewidth}{!}{
@@ -696,9 +660,7 @@ Each episode consists of a \textbf{video phase} and an \textbf{execution phase}.
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{VideoPlaceButton} Task Configuration.}
-    \vspace{-0.2cm}
     \label{tab:videoplacebutton_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
     {\resizebox{\linewidth}{!}{
@@ -711,7 +673,6 @@ Each episode consists of a \textbf{video phase} and an \textbf{execution phase}.
         Hard   & 3  & 4 & Yes \\
         \bottomrule
     \end{tabular}}}
-    \vspace{-0.5cm}
 \end{wraptable}
 
 The \textit{VideoPlaceButton} task, illustrated in Fig.~\ref{fig:videoplacebutton}, tests long-video temporal reasoning and object grounding. The robot must watch a long video in which a cube is placed on multiple targets, separated by a distinct button press, and then parse a natural language instruction specifying a temporal relation (e.g., \textit{before} or \textit{after} the button press) to identify the correct destination. Task configurations are summarized in Table~\ref{tab:videoplacebutton_difficulty_config}.
@@ -752,9 +713,7 @@ Each episode has a \textbf{video phase} and an \textbf{execution phase}.
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{\textit{VideoPlaceOrder} Task Configuration.}
-        \vspace{-0.2cm}
     \label{tab:videoplaceorder_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
    {\resizebox{\linewidth}{!}{
@@ -767,7 +726,6 @@ Each episode has a \textbf{video phase} and an \textbf{execution phase}.
         Hard   & 3 & 4 & Yes\\
         \bottomrule
     \end{tabular}}}
-    \vspace{-0.5cm}
 \end{wraptable}
 
 The \textit{VideoPlaceOrder} task, illustrated in Fig.~\ref{fig:videoplaceorder}, evaluates long-video temporal reasoning and object grounding. The robot must watch a long video to memorize the sequence of cube placements, then parse a natural language instruction specifying an ordinal position (e.g., ``the third target'') to identify the correct destination.
@@ -882,10 +840,7 @@ Each episode consists of a \textbf{video phase} and an \textbf{execution phase}.
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
-
     \caption{\textit{PatternLock} Task Configuration}
-    \vspace{-0.2cm}
     \label{tab:patternlock_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
     \resizebox{0.8\linewidth}{!}{
@@ -898,7 +853,6 @@ Each episode consists of a \textbf{video phase} and an \textbf{execution phase}.
         \textbf{Hard}   & 5$\times$5  & 4--8 \\
         \bottomrule
     \end{tabular}}
-    \vspace{-0.5cm}
 \end{wraptable}
 
 The \textit{PatternLock} task, illustrated in Fig.~\ref{fig:patternlock}, evaluates the robot’s long-horizon procedural memory from a video demonstration. The robot observes a stick attached to the end-effector tracing a continuous pattern over a NxN grid of gray targets, and must then reproduce the same trajectory during execution.
@@ -908,7 +862,6 @@ Success requires following the full demonstrated sequence without skipping or mo
     \includegraphics[width=0.85\linewidth]{images/tasks/patternlock.png}
     \caption{\textbf{PatternLock Task Example.} In this instance, the goal is to watch the video carefully and then use the stick attached to the robot to retrace the same pattern shown in the video. Red-bordered frames denote the video-based observations prior to execution.}
     \label{fig:patternlock}
-    \vspace{-10pt}
 \end{figure}
 
 
@@ -953,7 +906,6 @@ Each episode consists of a \textbf{video phase} and an \textbf{execution phase}.
 
 \begin{wraptable}{r}{0.35\linewidth}
     \centering
-    \vspace{-0.5cm}
     \caption{RouteStick Task Configuration}
     \label{tab:routestick_difficulty_config}
     \renewcommand{\arraystretch}{1.2}
@@ -967,7 +919,6 @@ Each episode consists of a \textbf{video phase} and an \textbf{execution phase}.
         \textbf{Hard}   & 4--7  & Yes \\
         \bottomrule
     \end{tabular}}
-    \vspace{-0.5cm}
 \end{wraptable}
 
 
@@ -978,8 +929,6 @@ The \textit{RouteStick} task, illustrated in Fig.~\ref{fig:routestick}, evaluate
     \centering
     \includegraphics[width=1\linewidth]{images/tasks/routestick.png}
     \caption{\textbf{RouteStick Task Example.} In this instance, the robot watches the video and uses the stick attached to the end-effector to navigate around obstacles on the table, reproducing the demonstrated path.}
-    \vspace{-10pt}
-
     \label{fig:routestick}
 \end{figure}
 

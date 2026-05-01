@@ -16,7 +16,7 @@ Human participants, in contrast, perform well on most tasks. However, failures s
 These results indicate that \benchname\xspace imposes substantial long-term memory demands even for humans.
 
 
-\begin{table*}[h]
+\begin{table*}[t]
 \caption{Performance using the oracle planner for both foundation models and human participants.}
 \label{tab:oracle_planner}
 \centering
@@ -96,7 +96,7 @@ All our \modelname\xspace models are evaluated over nine runs, while the prior m
 We observe that no single method fully solves an entire task suite, suggesting that task demands cannot be explained by a simple one-to-one correspondence between cognitive memory types and model memory representations. 
 To better analyze task differences, we regroup tasks according to their functional characteristics, as summarized in Table~\ref{tab:task_characteristics}. The regrouped results are given in Tab~\ref{tab:task_requirement_model}, we compare the our \modelname\xspace variants trained with symbolic and perceuptual memory, as well as the strongest prior method MemER.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \small
 \caption{Task categorization based on functional characteristics.}
@@ -134,7 +134,7 @@ To better analyze task differences, we regroup tasks according to their function
 
 \bottomrule
 \end{tabular}}
-\end{table}
+\end{table*}
 
 
 
@@ -156,5 +156,4 @@ We will continue to check and plan to update these results once a stable impleme
 The code for adapting Diffusion Policy and MemoryVLA to RoboMME can be found at \url{https://github.com/RoboMME/DP} and 
 \url{https://github.com/RoboMME/MemoryVLA}. 
 \input{tables/appendix_main_table}
-
 

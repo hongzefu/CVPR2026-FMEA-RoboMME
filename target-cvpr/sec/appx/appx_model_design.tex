@@ -74,17 +74,23 @@ Unlike the original $\pi_{0.5}$, which also generates low-level commands directl
 The action expert is a lightweight transformer that predicts actions by attending to the VLM features.
 Let $\mathbf{s}_t^{0} \in \mathbb{R}^{N_s \times d}$ denote the action input injected with noise. Then for each layer:
 \begin{align}
-\tilde{\mathbf{s}}_t^{k} =
+\tilde{\mathbf{s}}_t^{k}
+&=
 \mathbf{s}_t^{k-1} +
-g_{\tau} &\odot 
+g_{\tau} \odot
+\notag\\
+&\quad
 \mathrm{BlockAttn}^{k}\!\big(
 \mathrm{Norm}_\text{vlm}^{k}(\mathbf{u}_t^{k-1}),
 \mathrm{Norm}_\text{act}^{k}(\mathbf{s}_t^{k-1}, \tau)
 \big), 
 \label{eq:act_attn}\\
-\mathbf{s}_t^{k} =
+\mathbf{s}_t^{k}
+&=
 \tilde{\mathbf{s}}_t^{k} +
-\tilde{g}_{\tau} &\odot
+\tilde{g}_{\tau} \odot
+\notag\\
+&\quad
 \mathrm{MLP}_{\text{act}}^{k}\!\big(
 \mathrm{Norm}_\text{act}^{k}(\tilde{\mathbf{s}}_t^{k}, \tau)
 \big).
@@ -255,8 +261,15 @@ Memory slots attend to each chunk and are updated recurrently:
 \begin{align}
 \mathbf{S}_t^{(m)}
 &= \mathrm{Transformer}\big(
+\notag\\
+&\quad
 Q=\mathbf{S}_t^{(m-1)},,
+\notag
+\\
+&\quad
 K=[\mathbf{o}_t^{(m)};\mathbf{S}_t^{(m-1)}],,
+\notag\\
+&\quad
 V=[\mathbf{o}_t^{(m)};\mathbf{S}_t^{(m-1)}]
 \big),
 \end{align}
@@ -353,18 +366,22 @@ where $\mathbf{v}_t^{0}=\mathbf{M}_t$ denotes the input memory tokens.
 
 The resulting memory features are then used as additional context in the action attention.
 Accordingly, Eq.~\ref{eq:act_attn} becomes
-\[
+\begin{align*}
 \tilde{\mathbf{s}}_t^{k}
-=
+&=
 \mathbf{s}_t^{k-1}
 +
 g_{\tau} \odot
+\notag\\
+&\quad
 \mathrm{BlockAttn}^{k}\!\big(
 \mathrm{Norm}^{k}_{\text{mem}}(\mathbf{v}_t^{k-1}),
+\notag\\
+&\quad
 \mathrm{Norm}^{k}_{\text{vlm}}(\mathbf{u}_t^{k-1}),
 \mathrm{Norm}^{k}_{\text{act}}(\mathbf{s}_t^{k-1}, \tau)
 \big).
-\]
+\end{align*}
 
 This design preserves memory as explicit tokens while enabling higher-capacity processing via a separate expert.
 \textit{To avoid interfering with the VLM representations, the VLM and memory experts use self-attention only, and only the action expert attends to both as context}.

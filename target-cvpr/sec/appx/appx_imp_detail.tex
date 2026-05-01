@@ -25,11 +25,12 @@ After memory initialization, the agent begins execution using the current observ
 
 Our code for adapting SAM2Act+ can be found at \url{https://github.com/RoboMME/SAM2Act}
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \caption{Training hyperparameters for SAM2Act and SAM2Act+.}
 \label{tab:sam2actplus_train_hparams}
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lcc}
 \toprule
 \textbf{Hyperparameters} & \textbf{SAM2Act Training} & \textbf{SAM2Act+ Training} \\
@@ -45,7 +46,7 @@ training epochs & 10 & 10 \\
 LoRA rank & 16 & 16 \\
 data distribution & task uniform & demo uniform temporal\\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 
@@ -60,7 +61,7 @@ Language subgoals help decompose complicated tasks into a sequence of subtasks, 
 We train all VLM-based subgoal predictors using \textbf{Qwen3-VL-4B-Instruct}, which provides strong visual reasoning and grounding capabilities while remaining efficient to fine-tune. In preliminary experiments, it achieves better performance than Qwen2.5-VL-7B with substantially lower computational cost.
 
 We fine-tune all models using \texttt{Swift}\footnote{\url{https://github.com/modelscope/ms-swift}} with LoRA adaptation. The training configuration is as below, the remaining hyperparameters keep default settings provided by \texttt{Swift}.
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \caption{Training configuration for VLM subgoal predictor.}
 \label{tab:train_hparams_vlm}
@@ -182,7 +183,7 @@ Figures~\ref{fig:simple_prompt} and~\ref{fig:grounded_prompt} illustrate the tra
 \end{figure}
 \clearpage
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
 \begin{tcolorbox}[
   enhanced,
@@ -199,7 +200,7 @@ Figures~\ref{fig:simple_prompt} and~\ref{fig:grounded_prompt} illustrate the tra
   attach boxed title to top left={yshift=-1mm,xshift=1mm},
   boxed title style={arc=1pt,boxrule=0pt,left=8pt,right=8pt,top=3pt,bottom=3pt},
 ]
-\begin{lstlisting}[language=json]
+\begin{lstlisting}[language=json,basicstyle=\ttfamily\tiny]
 {
    "messages":[
       {
@@ -241,7 +242,7 @@ Figures~\ref{fig:simple_prompt} and~\ref{fig:grounded_prompt} illustrate the tra
 \end{tcolorbox}
 \caption{Example Prompt for MemER Baseline. We use grounded subgoals for them since we gound grounded subgoals are better.}
 \label{fig:memer_prompt}
-\end{figure}
+\end{figure*}
 \clearpage
 
 
@@ -291,10 +292,11 @@ For \textbf{memory-as-expert}, we introduce a dedicated 18-layer transformer exp
 We largely follow a unified training recipe across all MME-VLA variants to ensure fair comparison. Specifically, we adopt the released $\pi_{0.5}$ configuration from the LIBERO benchmark and \textit{exclude proprioceptive states from the inputs}. To accelerate training, we freeze the SigLIP2 vision backbone and precompute and cache all visual tokens as in \cite{longdp}, fine-tuning only the VLM expert, the action expert, and any parameters introduced by memory. Each model is trained on four A40 GPUs\footnote{For RMT-based recurrent models, we instead use A100 GPUs due to insufficient memory on A40 GPUs.} for approximately 3-4 days. Additional hyperparameters and implementation details are provided in Table~\ref{tab:train_hparams_historypi05}. 
 
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \caption{Training configuration for MME-VLA models.}
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{ll}
 \toprule
 \textbf{Hyperparameter} & \textbf{Value} \\
@@ -316,7 +318,7 @@ Save Interval & 10{,}000 \\
 Frozen Part & SigLIP ViT \\
 FSDP Devices & 4 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \label{tab:train_hparams_historypi05}
 \end{table}
 
