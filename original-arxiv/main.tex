@@ -1,0 +1,260 @@
+\documentclass[letterpaper]{cmu}
+
+\usepackage[all]{hypcap}
+\usepackage[comma,numbers,sort,compress]{natbib}
+\usepackage{hyperref}[citecolor=magenta]
+
+\hypersetup{
+    colorlinks = true,
+    citecolor = {magenta},
+}
+
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs}
+\usepackage{float}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{nicefrac}
+\usepackage{dsfont}
+\usepackage{enumitem}
+\usepackage{float}
+
+\setlength\parindent{0pt}
+
+\usepackage{xspace}
+\usepackage[capitalize,noabbrev]{cleveref}
+\bibliographystyle{plainnat}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{listings}
+
+\usepackage{bbm}
+\usepackage{fleqn, tabularx}
+\usepackage{multirow}
+\usepackage[export]{adjustbox}
+\usepackage{colortbl}
+
+\usepackage{algpseudocode}
+\usepackage{setspace}
+
+
+
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{arydshln}
+\usepackage{xcolor}
+\usepackage{pifont}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{rotating}   % for sidewaystable*
+\usepackage{makecell}   % optional, for line breaks in headers
+\usepackage{pifont}
+\usepackage{graphicx}
+
+\setlength{\dashlinedash}{2pt}  % length of each dash
+\setlength{\dashlinegap}{2pt}   % gap between dashes
+
+% Colored check / cross symbols
+\newcommand{\cmark}{\textcolor{green!60!black}{\ding{51}}}
+\newcommand{\xmark}{\textcolor{red!70!black}{\ding{55}}}
+\definecolor{softred}{RGB}{200,10,10}
+\newcommand{\best}[1]{\textbf{\textcolor{softred}{#1}}}
+\newcommand{\pmstd}[1]{\scriptsize{\,±\,#1}}
+\newcommand{\task}[2]
+{\makecell{\text{{#1}}\\\text{{#2}}}}
+\newcommand{\meth}[2]{\makecell[l]{\texttt{#1}\\\texttt{#2}}} % 2-line method name
+\newcommand{\mone}[1]{\makecell[l]{\texttt{#1}}}              % 1-line method name
+\newcommand{\mema}[2]{\makebox[2cm][l]{{#1}} #2}
+\newcommand{\memame}[2]{\makebox[2.8cm][l]{#1}  #2}
+
+\usepackage[table]{xcolor}
+\definecolor{rowgray}{gray}{0.96}
+% \definecolor{rowgray}{RGB}{235, 255, 255}
+\definecolor{cellred}{RGB}{230,30,30}
+% \newcommand{\bestbest}[1]{\colorbox{cellred}{\textcolor{white}{\textbf{#1}}}}
+\newcommand{\bestbest}[1]{\fcolorbox{red}{red!5}{\best{#1}}}
+\definecolor{headerblue}{RGB}{215,220,255}
+
+\newcounter{q}
+\newcommand{\Q}{Q\stepcounter{q}\arabic{q}}
+
+\newcommand{\TSone}{\texttt{Counting}}
+\newcommand{\TStwo}{\texttt{Permanence}}
+\newcommand{\TSthree}{\texttt{Reference}}
+\newcommand{\TSfour}{\texttt{Imitation}}
+\newcommand{\benchname}{RoboMME}
+\newcommand{\modelname}{MME-VLA}
+\newcommand{\trainsteps}{770k}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\definecolor{rliableolive}{HTML}{BBCC33}
+\definecolor{rliableblue}{HTML}{77AADD}
+\definecolor{rliablered}{HTML}{EE8866}
+\definecolor{myblue}{rgb}{0.1,0.4,0.9}
+\definecolor{lightblue}{rgb}{0.22,0.45,0.70}
+\definecolor{figurebackground}{HTML}{F9F8F3}
+
+\usepackage{pifont}
+\usepackage{soul}
+\definecolor{highlightmistake}{RGB}{255, 179, 179}
+\definecolor{highlightcorrect}{RGB}{179, 255, 179}
+
+
+\lstdefinelanguage{json}{
+  morestring=[b]",
+  stringstyle=\ttfamily,
+  showstringspaces=false,
+  breaklines=true,
+  basicstyle=\ttfamily\footnotesize,
+  keywords={true,false,null},
+  keywordstyle=\bfseries,
+}
+
+\lstset{
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=none,
+  xleftmargin=0pt,
+  aboveskip=0pt,
+  belowskip=0pt,
+}
+
+
+\tcbset{
+  aibox/.style={
+    width=\linewidth,
+    top=8pt,
+    bottom=4pt,
+    colback=figurebackground,
+    colframe=black,
+    colbacktitle=black,
+    enhanced,
+    center,
+    attach boxed title to top left={yshift=-0.1in,xshift=0.15in},
+    boxed title style={boxrule=0pt,colframe=white,},
+  }
+}
+\newtcolorbox{AIbox}[2][]{aibox,title=#2,#1}
+
+
+
+
+% if you use cleveref..
+\usepackage[capitalize,noabbrev]{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\usepackage[textsize=tiny]{todonotes}
+
+
+\title{\benchname: Benchmarking and Understanding Memory for Robotic Generalist Policies}
+
+
+% \author{
+%   Yinpei Dai$^1$, Hongze Fu$^1$, Jayjun Lee$^1$, Yuejiang Liu$^2$, Haoran Zhang$^1$\\
+%   \textbf{Jianing Yang$^3$, Chelsea Finn$^2$, Nima Fazeli$^1$$^\star$, Joyce Chai$^1$$^\star$} \\
+%   $^1$University of Michigan $\quad$ 
+%   $^2$Stanford University   $\quad$ 
+%   $^3$Figure AI \\
+%   $^\star$ Equal Supervision\\
+%   \texttt{\{daiyp, hongzefu, nfz, chaijy\}@umich.edu}
+% }
+
+
+
+\author[1]{Yinpei Dai}
+\author[1]{\!Hongze Fu}
+\author[1]{\!Jayjun Lee}
+\author[2]{\!Yuejiang Liu}
+\author[1]{\!Haoran Zhang}
+\author[3]{\!Jianing Yang}
+\author[2]{\!Chelsea Finn}
+\author[1$\dagger$]{\!Nima Fazeli}
+\author[1$\dagger$]{\!Joyce Chai}
+\affil[1]{University of Michigan}
+\affil[2]{Stanford University}
+\affil[3]{Figure AI}
+
+\correspondingauthor{
+\{daiyp, hongzefu, nfz, chaijy\}@umich.edu.
+~~~$^\dagger$\emph{Equal advising.} 
+}
+
+
+
+% \correspondingauthor{Max Sobol Mark (maxsobolmark@cmu.edu).} ~~~$^\dagger$\emph{Equal advising.} \\ \textbf{Project website:} \href{https://robomme.github.io/}{https://robomme.github.io/}
+
+\hyphenation{pre-print}
+
+\begin{abstract}
+\end{abstract}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-1.2cm}
+\input{files/teaser}
+\vspace{-0.2cm}
+
+{\absfont \textbf{Abstract:} \input{files/abs}}
+
+
+\input{files/intro}
+\input{files/related_work}
+\input{files/benchmark}
+\input{files/method}
+\input{files/experiment}
+\input{files/conclusion}
+
+\newpage
+\input{files/impact_statement}
+\bibliography{main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\appendix
+\onecolumn
+\input{files/appendix}
+
+
+\end{document}
+

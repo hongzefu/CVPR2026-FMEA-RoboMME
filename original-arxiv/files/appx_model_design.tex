@@ -1,0 +1,370 @@
+\clearpage
+\section{Model Architectures in the MME-VLA Suite}
+\label{sec:appx_model_design}
+
+In the MME-VLA suite, we develop a family of vision-language-action (VLA) policies based on a shared $\pi_{0.5}$ backbone. We first introduce the notation for the base architecture, then describe how different memory \emph{representations} instantiate memory, and finally explain how different \emph{integration mechanisms} incorporate memory into the $\pi_{0.5}$ policy.
+
+
+\subsection{Basic $\pi_{0.5}$ Architecture}
+\label{sec:pi05}
+\paragraph{Tokenization.}
+At timestep $t$, the policy receives
+(i) \textbf{language tokens} encoding the task instruction $l$, and
+(ii) \textbf{image tokens} encoding the current multi-view RGB observations
+$I_t=(I^{1}_t,I^{2}_t,\dots)$:
+\begin{align}
+\boldsymbol{\ell} &= \mathrm{Tok}_{\text{text}}(l) \in \mathbb{R}^{N_\ell \times d}, \\
+\mathbf{o}_t &= \mathrm{Tok}_{\text{img}}(I_t) \in \mathbb{R}^{N_o \times d}.
+\end{align}
+Here $d$ is the token embedding dimension, $N_o$ and $N_o$ denote the total number of language and visual tokens, respectively. 
+
+\paragraph{Experts.}
+$\pi_{0.5}$ \cite{pi05} follows the $\pi_{0}$ design \cite{pi0} and adopts a multi-expert transformer architecture composed of:
+\begin{itemize}
+\item a \textbf{VLM expert} $E_{\text{vlm}}$ that fuses language and vision, and
+\item an \textbf{action expert} $E_{\text{act}}$ that predicts actions conditioned on the VLM features and the denoise timestep.
+\end{itemize}
+Both experts consist of $L$ standard transformer layers with blockwise causal attention and MLPs.
+
+
+\paragraph{Blockwise causal attention.}
+We define a general blockwise attention operator
+\begin{align}
+\mathbf{y}
+=
+\mathrm{BlockAttn}(\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_G),
+\end{align}
+where each $\mathbf{x}_i \in \mathbb{R}^{n_i \times d}$ is treated as a block.
+Attention is bidirectional within each block and causal across blocks, i.e.,
+tokens in block $i$ may attend to blocks $1{:}i$ but not to future blocks.
+The operator returns the updated representation of the final block,
+$\mathbf{y} \in \mathbb{R}^{n_G \times d}$.
+
+
+% ------------------------------------------------------------
+\paragraph{VLM expert.}
+A transformer encoder is used to extract joint visual-language features.
+The input consists of visual tokens $\mathbf{o}_t$ and language tokens $\boldsymbol{\ell}$:
+\begin{align}
+\mathbf{u}_t^{0} &= [\mathbf{o}_t;\boldsymbol{\ell}].
+\end{align}
+where concatenation along the sequence dimension is denoted by $[\cdot;\cdot]$.
+
+Each layer applies blockwise causal attention followed by an MLP:
+\begin{align}
+\tilde{\mathbf{u}}_t^{k}
+&=
+\mathbf{u}_t^{k-1}
++
+\mathrm{BlockAttn}^{k}\!\big(\mathrm{Norm}^k_\text{vlm}(\mathbf{u}_t^{k-1})\big),\\
+\mathbf{u}_t^{k}
+&=
+\tilde{\mathbf{u}}_t^{k}
++
+\mathrm{MLP}_{\text{vlm}}^{k}\!\big(\mathrm{Norm}^k_\text{vlm}(\tilde{\mathbf{u}}_t^{k})\big),
+\end{align}
+for layer $k=1,\dots,L$, producing $\mathbf{u}_t=\mathbf{u}_t^{L}$. Here, there is only a single input block. $\mathrm{Norm}$ is implemented as RMSNorm. Unless otherwise specified, the normalization layers used in the attention and MLP modules are separately parameterized; we use the same notation here for simplicity.
+
+Unlike the original $\pi_{0.5}$, which also generates low-level commands directly from the VLM expert for task decomposition, we use the VLM solely as a feature extractor, similar to $\pi_0$.
+
+
+% ------------------------------------------------------------
+
+\paragraph{Action expert.}
+The action expert is a lightweight transformer that predicts actions by attending to the VLM features.
+Let $\mathbf{s}_t^{0} \in \mathbb{R}^{N_s \times d}$ denote the action input injected with noise. Then for each layer:
+\begin{align}
+\tilde{\mathbf{s}}_t^{k} =
+\mathbf{s}_t^{k-1} +
+g_{\tau} &\odot 
+\mathrm{BlockAttn}^{k}\!\big(
+\mathrm{Norm}_\text{vlm}^{k}(\mathbf{u}_t^{k-1}),
+\mathrm{Norm}_\text{act}^{k}(\mathbf{s}_t^{k-1}, \tau)
+\big), 
+\label{eq:act_attn}\\
+\mathbf{s}_t^{k} =
+\tilde{\mathbf{s}}_t^{k} +
+\tilde{g}_{\tau} &\odot
+\mathrm{MLP}_{\text{act}}^{k}\!\big(
+\mathrm{Norm}_\text{act}^{k}(\tilde{\mathbf{s}}_t^{k}, \tau)
+\big).
+\label{eq:act_mlp}
+\end{align}
+
+Here, $\mathrm{Norm}(\cdot, \tau)$ is implemented as RMSNorm conditioned on the embedding of the denoising timestep $\tau$.
+$g^\tau$ and $\tilde{g}^\tau$ are gating functions conditioned on $\tau$, and $\odot$ denotes feature-wise multiplication.
+This mechanism corresponds to AdaLN-Zero \cite{peebles2023scalable}.
+The policy then predicts the next action $a_t \in \mathbb{R}^{D}$ (or an action chunk) via an output projection:
+\begin{equation}
+a_t \sim \pi(a_t \mid I_t, l) \;=\; \mathrm{Proj}(\mathbf{s}_t^{L}).
+\end{equation}
+
+% ------------------------------------------------------------
+\paragraph{Flow-matching objective.}
+
+At history timestep $t$, the policy predicts an $H$-step action chunk representing future actions:
+\begin{equation}
+\mathbf{A}_t = [a_t, a_{t+1}, \dots, a_{t+H-1}] \in \mathbb{R}^{H \times D}.
+\end{equation}
+
+Let $\mathbf{h}_t$ denote the context features. 
+Following conditional flow matching, we learn a velocity field that transports Gaussian noise to the data action distribution.
+
+We sample a ground-truth chunk
+$\mathbf{A}_t^{\text{data}} \sim p_{\text{data}}$
+and noise
+$\mathbf{A}_t^{\text{noise}} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$,
+and draw a denoising timestep $\tau \sim \mathcal{U}(0,1)$.
+We construct the linear interpolation
+\begin{equation}
+\mathbf{A}_t^\tau
+=
+(1-\tau)\mathbf{A}_t^{\text{data}}
++
+\tau \mathbf{A}_t^{\text{noise}} .
+\end{equation}
+
+The time derivative of this path is constant,
+$\frac{d}{d\tau}\mathbf{A}_t^\tau=\mathbf{A}_t^{\text{noise}}-\mathbf{A}_t^{\text{data}}$.
+The action expert parameterizes a conditional velocity field
+\begin{equation}
+\mathbf{v}_\theta(\mathbf{A}_t^\tau, \tau, \mathbf{h}_t),
+\end{equation}
+which is trained to match this transport direction via
+\begin{equation}
+\mathcal{L}_{\mathrm{FM}}
+=
+\mathbb{E}
+\left[
+\left\|
+\mathbf{v}_\theta(\mathbf{A}_t^\tau, \tau, \mathbf{h}_t)
+-
+\big(
+\mathbf{A}_t^{\text{noise}}
+-
+\mathbf{A}_t^{\text{data}}
+\big)
+\right\|_2^2
+\right].
+\end{equation}
+
+For more comprehensive understanding about $\pi_{0}$ and $\pi_{0.5}$ models, please refer to the original papers \cite{pi05, pi0}.
+% ============================================================
+
+\subsection{Memory Representations}
+\label{sec:memory_repr}
+
+To enable history-dependent reasoning, we augment the policy with an explicit memory state $\mathbf{M}_t$:
+\[
+a_t \sim \pi(\cdot \mid l, \mathbf{o}_t, \mathbf{M}_t),
+\]
+where $\mathbf{M}_t$ summarizes past observations and actions.
+
+For fair comparison across designs, we allocate a fixed memory token budget $B$ for all memory-based models. Each representation produces at most $B$ tokens; if fewer are available, the sequence is zero-padded. Thus all memory variants share the same interface:
+\[
+\mathbf{M}_t \in \mathbb{R}^{B \times d}.
+\]
+
+We consider three classes of memory representations: \textit{symbolic}, \textit{perceptual}, and \textit{recurrent} memory.
+
+% ------------------------------------------------------------
+\subsubsection{Symbolic Memory}
+
+Symbolic memory summarizes history using discrete abstractions (e.g., language subgoals). Let
+\[
+\mathcal{H}_t=\{(I_\tau,a_\tau)\}_{\tau<t}
+\]
+denote the trajectory history. A subgoal generator $g(\cdot)$ (implemented by a VLM) produces a text summary, which is tokenized into memory tokens:
+\[
+\mathbf{M}_t^{\text{sym}}
+=
+\mathrm{Tok}_{\text{text}}\!\big(g(\mathcal{H}_t)\big)
+\in \mathbb{R}^{B \times d}.
+\]
+This representation compresses the trajectory into compact semantic descriptions, enabling high-level reasoning and structured planning.\footnote{Although the original $\pi_{0.5}$ model is capable of generating language subgoals, we treat the VLA primarily as a language-conditioned policy in this study. To control for the source and quality of subgoal generation, we instead employ external models to produce language subgoals.}
+
+% ------------------------------------------------------------
+\subsubsection{Perceptual Memory}
+
+Perceptual memory retains selected visual tokens\footnote{We also experimented with incorporating historical proprioceptive states, but observed no consistent performance improvement. Therefore, we restrict perceptual memory to visual tokens only.} from past observations:
+\[
+\mathbf{M}_t^{\text{perc}}
+=
+\mathrm{Select}\big(\{\mathbf{o}_\tau\}_{\tau\le t}, B\big).
+\]
+Where $\mathrm{Select}(\cdot)$ is a image token selection operator.
+Unlike symbolic memory, this representation preserves differentiable visual features and enables end-to-end optimization. 
+
+We study two instantiations.
+
+\paragraph{Frame Sampling (\textsc{FrameSamp}).}
+We select a subset of history timesteps $\mathcal{S}_t \subseteq \{0,\dots,t\}$ with $|\mathcal{S}_t|=N$ (e.g., evenly spaced) and retain pooled tokens from each frame:
+\begin{align}
+\mathcal{S}_t &= \mathrm{EvenSample}(\{0,\dots,t\}; N),\\
+\mathbf{M}_t^{\text{perc}}
+&= \big[\mathrm{MaxPool}(\mathbf{o}_{\tau})\big]_{\tau \in \mathcal{S}_t}.
+\end{align}
+Here $\mathrm{MaxPool}$ reduces each frame from original 16$\times$16 tokens (extracted by SigLIP \cite{tschannen2025siglip}, the vision encoder of $\pi_{0.5}$) to $P$ tokens per view (e.g, 4$\times$4, 8$\times$8). With $V$ views, $N = B/PV$.
+
+
+\paragraph{Token Dropping (\textsc{TokenDrop}).}
+Rather than sampling whole frames, we select the most informative spatial regions (i.e., image patches) across time.
+To reduce computation and noise, we also first spatially pool each frame's tokens from original $16{\times}16$ to a $P$ tokens:
+\[
+\tilde{\mathbf{o}}_\tau = \mathrm{MaxPool}(\mathbf{o}_\tau),
+\]
+
+
+We then score each pooled token $\tilde{\mathbf{o}}_{\tau,i}$ with an importance function comparing with previous $K$-th frame tokens at the same patch.
+\begin{align}
+s_{\tau,i} &= J(\tilde{\mathbf{o}}_{\tau,i}, \tilde{\mathbf{o}}_{\tau-K,i}),
+\end{align}
+where $i$ indexes pooled spatial locations, $K$ is a fixed stride.
+We keep the top $B$ tokens across all timesteps:
+\begin{align}
+\mathcal{K}_t
+&= \mathrm{TopK}\Big(\{(\tau,i)\},\, B;\, s_{\tau,i}\Big),\\
+\mathbf{M}_t^{\text{perc}}
+&= \big[\tilde{\mathbf{o}}_{\tau,i}\big]_{(\tau,i)\in \mathcal{K}_t}.
+\end{align}
+
+In practice, $J(\cdot,\cdot)$ measures temporal saliency via average RGB patch differences across frames, prioritizing regions with significant motion or appearance changes while keeping the memory budget fixed. To preserve spatiotemporal structure, we adopt Multi-modal Rotary Position Embedding (M-ROPE) \cite{yao2025timechat}, assigning each video token a 3D index over time, height, and width. Tokens from the first frame are fully preserved to provide complete context.
+% We compute these 3D M-ROPE coordinates before token dropping, allowing the selected tokens to retain their original spatial–temporal positions despite subsampling.
+
+
+% ------------------------------------------------------------
+\subsubsection{Recurrent Memory}
+
+Recurrent memory compresses history into a fixed-size latent state updated online:
+\[
+\mathbf{S}_t = f_{\text{mem}}(\mathbf{S}_{t-1}, \mathbf{o}_t).
+\]
+The resulting state is exposed as memory tokens $\mathbf{M}_t^{\text{recu}}$.
+
+We consider two instantiations.
+
+\paragraph{Recurrent Memory Transformer (RMT).}
+RMT maintains $B$ persistent memory slots
+$\mathbf{S}_{\text{init}} \in \mathbb{R}^{B \times d}$.
+At each timestep, observation tokens are processed sequentially in $M$ chunks:
+\[
+\mathbf{o}_t = [\mathbf{o}_t^{(1)}, \dots, \mathbf{o}_t^{(M)}], \qquad
+\mathbf{o}_t^{(m)} \in \mathbb{R}^{N_C \times d}.
+\]
+Memory slots attend to each chunk and are updated recurrently:
+\begin{align}
+\mathbf{S}_t^{(m)}
+&= \mathrm{Transformer}\big(
+Q=\mathbf{S}_t^{(m-1)},,
+K=[\mathbf{o}_t^{(m)};\mathbf{S}_t^{(m-1)}],,
+V=[\mathbf{o}_t^{(m)};\mathbf{S}_t^{(m-1)}]
+\big),
+\end{align}
+initialized with $\mathbf{S}_t^{(0)}=\mathbf{S}_{\text{init}}$.
+Here, $\mathrm{Transformer}(Q, K, V)$ denotes a standard transformer layer that uses $Q$ as queries and $[K, V]$ as the key-value sequence, returning the updated representations corresponding to the query tokens.
+After all chunks,
+\[
+\mathbf{M}_t^{\text{recu}} = \mathbf{S}_t^{(M)}.
+\]
+Thus, RMT stores history explicitly in token space through persistent memory slots. In our implementation, we only use the attention block without the MLP block for simplicity. 
+
+\paragraph{Test-Time Training (TTT).}
+TTT stores memory implicitly in a small set of fast weights rather than explicit tokens.
+Let $W_t$ denote fast weights associated with a lightweight feed-forward network. At each timestep, the weights are updated online using a local gradient step:
+\begin{equation}
+W_t
+=
+W_{t-1}
+-
+\eta \nabla_W \ell_{\text{aux}}(W_{t-1}; \mathbf{o}_t),
+\end{equation}
+where $\ell_{\text{aux}}$ is a self-supervised objective.
+The updated weights are immediately used for prediction:
+\[
+y_t = f(\mathbf{o}_t; W_t).
+\]
+thus the output $y_t$ implicitly contain the history information. 
+We use the last $B$ tokens from $y_{-B:}$ as $\mathbf{M}_t^{\text{recu}}$.
+TTT therefore stores history in parameter space rather than explicit memory tokens.
+
+
+% ============================================================
+\subsection{Memory Integration Mechanisms}
+\label{sec:memory_integration}
+
+We study how memory interacts with the backbone.
+
+% ------------------------------------------------------------
+\subsubsection{Memory-as-Context}
+
+Append memory tokens directly:
+\[
+\mathbf{u}_t
+=
+E_{\text{vlm}}([\mathbf{M}_t; \mathbf{o}_t;\boldsymbol{\ell}]).
+\]
+
+% ------------------------------------------------------------
+\subsubsection{Memory-as-Modulator}
+Inject memory through \emph{feature-wise modulation} inside the action expert.
+For each MLP sublayer of the action expert, Eq.~\ref{eq:act_mlp} becomes
+\begin{align}
+\mathbf{r}_t^{k}
+&=\mathrm{Attn}^{k}_{\text{mod}}(Q=\tilde{\mathbf{s}}_t^{k}, K=\mathbf{M}_t, V=\mathbf{M}_t), \\
+(\gamma_t^k,\beta_t^k)
+&=
+\mathrm{MLP}_{\text{mod}}^{k}(\mathbf{r}_t^{k}), \\
+\widehat{\mathbf{s}}_t^{k}&=\gamma_t^k \odot
+\mathrm{Norm}_{\text{mod}}^{k}(\tilde{\mathbf{s}}_t^{k})
++ \beta_t^k,\\
+\mathbf{s}_t^{k}
+&=
+\tilde{\mathbf{s}}_t^{k}
++
+\tilde{g}_{\tau} \odot
+\mathrm{MLP}_{\text{act}}^{k}\!\Big(
+\mathrm{Norm}_{\text{act}}^{k}(\widehat{\mathbf{s}}_t^{k}, \tau)\Big).
+\end{align}
+Here, $\mathbf{r}_t^{k}$ denotes the layer-wise modulation feature.
+The parameters of $\mathrm{MLP}_{\text{mod}}^{k}$ are initialized such that
+$\gamma_t^k=1$ and $\beta_t^k=0$, yielding an identity modulation at initialization of fine-tuning.
+
+% ------------------------------------------------------------
+\subsubsection{Memory-as-Expert}
+
+We allocate a dedicated memory expert $E_{\text{mem}}$ to process memory tokens:
+\begin{align}
+\tilde{\mathbf{v}}_t^{k}
+&=
+\mathbf{v}_t^{k-1}
++
+\mathrm{BlockAttn}^{k}\!\big(
+\mathrm{Norm}^{k}_{\text{mem}}(\mathbf{v}_t^{k-1})
+\big), \\
+\mathbf{v}_t^{k}
+&=
+\tilde{\mathbf{v}}_t^{k}
++
+\mathrm{MLP}_{\text{mem}}^{k}\!\big(
+\mathrm{Norm}^{k}_{\text{mem}}(\tilde{\mathbf{v}}_t^{k})
+\big),
+\end{align}
+where $\mathbf{v}_t^{0}=\mathbf{M}_t$ denotes the input memory tokens.
+
+The resulting memory features are then used as additional context in the action attention.
+Accordingly, Eq.~\ref{eq:act_attn} becomes
+\[
+\tilde{\mathbf{s}}_t^{k}
+=
+\mathbf{s}_t^{k-1}
++
+g_{\tau} \odot
+\mathrm{BlockAttn}^{k}\!\big(
+\mathrm{Norm}^{k}_{\text{mem}}(\mathbf{v}_t^{k-1}),
+\mathrm{Norm}^{k}_{\text{vlm}}(\mathbf{u}_t^{k-1}),
+\mathrm{Norm}^{k}_{\text{act}}(\mathbf{s}_t^{k-1}, \tau)
+\big).
+\]
+
+This design preserves memory as explicit tokens while enabling higher-capacity processing via a separate expert.
+\textit{To avoid interfering with the VLM representations, the VLM and memory experts use self-attention only, and only the action expert attends to both as context}.
