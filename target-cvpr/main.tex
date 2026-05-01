@@ -12,7 +12,7 @@
 
 % It is strongly recommended to use hyperref, especially for the review version.
 % hyperref with option pagebackref eases the reviewers' job.
-% Please disable hyperref *only* if you encounter grave issues, 
+% Please disable hyperref *only* if you encounter grave issues,
 % e.g. with the file validation for the camera-ready version.
 %
 % If you comment hyperref and then uncomment it, you should delete *.aux before re-running LaTeX.
@@ -26,7 +26,7 @@
 \def\confYear{2026}
 
 %%%%%%%%% TITLE - PLEASE UPDATE
-\title{\LaTeX\ Author Guidelines for \confName~Proceedings}
+\title{\benchname: Benchmarking and Understanding Memory for Robotic Generalist Policies}
 
 %%%%%%%%% AUTHORS - PLEASE UPDATE
 \author{First Author\\
@@ -47,17 +47,22 @@ First line of institution2 address\\
 
 \begin{document}
 \maketitle
-\input{sec/0_abstract}    
+
+\input{sec/0_abstract}
 \input{sec/1_intro}
-\input{sec/2_formatting}
-\input{sec/3_finalcopy}
+\input{sec/2_related_work}
+\input{sec/3_benchmark}
+\input{sec/4_method}
+\input{sec/5_experiment}
+\input{sec/6_conclusion}
+
 {
     \small
     \bibliographystyle{ieeenat_fullname}
     \bibliography{main}
 }
 
-% WARNING: do not forget to delete the supplementary pages from your submission 
-% \input{sec/X_suppl}
+% WARNING: do not forget to delete the supplementary pages from your submission
+\input{sec/X_suppl}
 
 \end{document}
