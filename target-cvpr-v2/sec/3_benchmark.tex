@@ -137,6 +137,11 @@ Annotations indicate the availability of language-based subgoals or keyframe tim
 \input{tables/benchmark_comparsion}
 
 
+The aim of \benchname\xspace is to rigorously evaluate history-dependent behavior in robotic manipulation.
+All tasks are intentionally constructed to be non-Markovian, requiring models to reason over past observations that are no longer visible at the current step.
+Memory is essential for these tasks because identical observations can arise from different histories yet require different actions.
+
+
 \subsection{Cognitively-Motivated Task Design}
 To systematically evaluate history-dependent, long-horizon manipulation, we ground our task design in established cognitive models of human memory. Classical theories \cite{atkinson1968human} divide long-term memory into \textit{procedural} and \textit{declarative} types, with declarative memory further divided into \textit{episodic} and \textit{semantic} forms. In particular, episodic memory supports recall of events and experiences, including temporal order, spatial context, and object identity \cite{burgess2002human, hasselmo2017models, babb2011object}, whereas procedural memory encodes motor skills acquired through practice \cite{squire2004memory}. Both are essential and relevant for memory-augmented manipulation, motivating the four memory types defined below.
 
@@ -151,7 +156,13 @@ To systematically evaluate history-dependent, long-horizon manipulation, we grou
 
 \end{itemize}
 
-\benchname\xspace is organized around these dimensions into four task suites, \TSone, \TStwo, \TSthree, and \TSfour, each emphasizing a primary memory type for controlled evaluation. \cref{fig:teaser} and \cref{tab:task_overview} provide an overview, with detailed descriptions in \cref{sec:appx_task_desc}.
+These four memory types correspond to the cognitive dimensions of when (temporal), where (spatial), what (object), and how (procedural).
+\benchname\xspace is organized around these dimensions into four task suites, \TSone, \TStwo, \TSthree, \TSfour, each emphasizing a primary memory type for controlled evaluation. \cref{fig:teaser} illustrates an overview of \benchname. Specifically, the \TSone\xspace suite targets \textit{temporal memory} by requiring agents to repeat actions a specified number of times, including pick-and-place, linear swinging, and time-critical  tasks.
+The \TStwo\xspace suite focuses on \textit{spatial memory}, evaluating object location tracking from pre-recorded videos or during concurrent manipulation.
+The \TSthree\xspace suite evaluates \textit{object memory} through persistent identity resolution under visual, action-based, and language-based referential cues.
+The \TSfour\xspace suite targets \textit{procedural memory} by requiring agents to reproduce demonstrated motion patterns, such as pushing, inserting, and sequential linear or circular motions.
+Together, these suites provide a complementary evaluation of memory-augmented manipulation across diverse memory demands.
+\cref{tab:task_overview} summarizes the tasks, with detailed descriptions in \cref{sec:appx_task_desc}.
 
 
 \begin{figure*}[t]
