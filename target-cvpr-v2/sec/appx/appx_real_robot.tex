@@ -25,7 +25,7 @@ We teleoperate the robot using an Oculus Quest~2 and record demonstrations at 15
 After data collection, we manually annotate each episode with grounded subgoals at keyframes. For simplicity, we omit grounding annotations for \textit{PutFruits}, as we found that simple goal descriptions are sufficient for counting-based behaviors.
 Figure~\ref{fig:platform} illustrates the platform setup. Experiments are conducted using a 7-DoF Franka Emika Panda robot equipped with UMI~\cite{chi2024UMI} fin-ray fingers mounted on the default Franka gripper. The robot operates in a tabletop environment with three RGB-D cameras following the DROID setup~\cite{khazatsky2024droid}: two Intel RealSense D435 cameras mounted on the left and right shoulders and one Intel RealSense D405 mounted on the wrist.
 
-For training, we evaluate our strongest perceptual model (\textsc{FrameSamp}+\texttt{Modul}), symbolic model (\textsc{TokenDrop} + \texttt{QwenVL}), and the $\pi_{0.5}$ baseline for comparison. We adopt a larger memory budget of $B=2048$, as simulation experiments showed only modest additional computational cost. We use the right-shoulder view image for the VLM subgoal predictor and memory contruction.
+To assess whether the trends observed on \benchname\xspace transfer to physical settings, we evaluate our strongest perceptual model (\textsc{FrameSamp}+\texttt{Modul}), symbolic model (\textsc{GroundSG}+\texttt{QwenVL}), and the $\pi_{0.5}$ baseline for comparison. We adopt a larger memory budget of $B=2048$, as simulation experiments showed only modest additional computational cost. We use the right-shoulder view image for the VLM subgoal predictor and memory contruction.
 \texttt{QwenVL} is trained using the same configuration as in simulation. The subgoal annotation for \textit{PutFruits} and \textit{DrawPattern} tasks does not contain grounding information.
 All other hyperparameters remain unchanged, except that we set the total number of training steps to 50k.
 
@@ -36,6 +36,41 @@ All other hyperparameters remain unchanged, except that we set the total number 
     \label{fig:platform}
 \end{figure}
 
+\begin{table}[t]
+    \centering
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\arraystretch}{0.95}
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{l llll c}
+\toprule
+\textbf{Method} &
+\makecell[l]{{\textbf{Put}} \\ {\textbf{Fruits}}} &
+\makecell[l]{{\textbf{Track}} \\{\textbf{Cube}}}  &
+\makecell[l]{{\textbf{Repick}} \\ {\textbf{Block}}} &
+\makecell[l]{{\textbf{Draw}} \\ {\textbf{Pattern}}} &
+\textbf{\texttt{Total}} \\
+\midrule
+
+$\pi_{0.5}$
+& 2/10 & 1/10 & 1/10 & 0/10 & 4/40 \\
+
+\midrule
+
+\textsc{GroundSG} + \texttt{QwenVL}
+& \best{9/10} & 3/10 & 5/10 & 2/10 & 19/40 \\
+
+\midrule
+
+\textsc{FrameSamp} + \texttt{Modul}
+& 6/10 & \best{5/10} & \best{6/10} & \best{8/10} & \best{25/40} \\
+
+\bottomrule
+\end{tabular}
+    }
+    \caption{Real-world experiment results.}
+    \label{tab:real}
+\end{table}
+
 The aggregated results for each task are shown in Table~\ref{tab:real}. All rollout demonstrations are available on the project website.
 
-We observe similar trends in the real world. Perceptual memory performs best on the motion-centric task \textit{DrawPattern}, whereas symbolic memory performs better on the event-salient task \textit{PutFruits}. Both approaches achieve moderate performance on \textit{RepickBlock}. On \textit{TrackCube}, perceptual memory performs slightly better, as the VLM-based subgoal predictor often fails to produce accurate grounding when dynamic swapping occurs.
+We observe similar trends in the real world. Perceptual memory performs best on the motion-centric task \textit{DrawPattern}, whereas symbolic memory performs better on the event-salient task \textit{PutFruits}. Both approaches achieve moderate performance on \textit{RepickBlock}. On \textit{TrackCube}, perceptual memory performs slightly better, as the VLM-based subgoal predictor often fails to produce accurate grounding when dynamic swapping occurs. Although both representations transfer the simulation trends to the real world, absolute success rates leave clear headroom on \textit{TrackCube} and \textit{RepickBlock}, suggesting room for further improvement.

@@ -95,44 +95,5 @@ Computational cost is estimated from the TFLOPs of a single forward pass based o
 As shown in \cref{fig:model_comparison}, perceptual memory achieves the most favorable balance. \textsc{FrameSamp}+\texttt{Modul} delivers consistent performance gains as the memory budget increases while incurring only modest additional cost, since most computation arises from processing visual tokens rather than from memory integration itself. In contrast, methods that rely on external VLM inference introduce substantially higher overhead: \textsc{GroundSG}+\texttt{QwenVL} requires roughly $3\times$ the computation of $\pi_{0.5}$, while MemER nearly $5\times$. In practice, these costs can be reduced through \textit{caching}, e.g., by reusing subgoals with less frequent VLM inference or reusing visual tokens to avoid redundancy.
 
 
-\begin{table}[t]
-    \centering
-    \setlength{\tabcolsep}{3pt}
-    \renewcommand{\arraystretch}{0.95}
-    \resizebox{\linewidth}{!}{
-    \begin{tabular}{l llll c}
-\toprule
-\textbf{Method} &
-\makecell[l]{{\textbf{Put}} \\ {\textbf{Fruits}}} &
-\makecell[l]{{\textbf{Track}} \\{\textbf{Cube}}}  &
-\makecell[l]{{\textbf{Repick}} \\ {\textbf{Block}}} &
-\makecell[l]{{\textbf{Draw}} \\ {\textbf{Pattern}}} &
-\textbf{\texttt{Total}} \\
-\midrule
-
-$\pi_{0.5}$
-& 2/10 & 1/10 & 1/10 & 0/10 & 4/40 \\
-
-\midrule
-
-\textsc{GroundSG} + \texttt{QwenVL}
-& \best{9/10} & 3/10 & 5/10 & 2/10 & 19/40 \\
-
-\midrule
-
-\textsc{FrameSamp} + \texttt{Modul}
-& 6/10 & \best{5/10} & \best{6/10} & \best{8/10} & \best{25/40} \\
-
-\bottomrule
-\end{tabular}
-    }
-    \caption{Real-world experiment results.}
-    \label{tab:real}
-    \vspace{-8pt}
-\end{table}
-
 \noindent{\bf \Q: Do the trends observed on \benchname\xspace transfer to real-world robotic manipulation?}
-Yes. We evaluate four real-world tasks, \textit{PutFruits}, \textit{TrackCube}, \textit{RepickBlock}, and \textit{DrawPattern}, designed to mirror the \textit{BinFill}, \textit{VideoUnmask(Swap)}, \textit{VideoRepick} and \textit{PatternLock} tasks in simulation.
-We collect a total of 350 demonstrations and test our strongest symbolic (\textsc{GroundSG}+\texttt{QwenVL}) and perceptual (\textsc{FrameSamp}+\texttt{Modul}) models to assess whether trends can transfer to physical settings.
-As shown in \cref{tab:real}, the results exhibit similar patterns. Symbolic memory performs best on the counting task \textit{PutFruits}, whereas perceptual memory excels on motion-centric tasks such as \textit{DrawPattern}. On the remaining two tasks, both approaches achieve comparable performance, suggesting room for further improvement.
-Additional details are provided in \cref{sec:appx_real_robot}.
+Yes. We evaluate four real-world tasks; see \cref{sec:appx_real_robot} for details.
