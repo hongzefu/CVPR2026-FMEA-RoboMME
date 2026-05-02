@@ -9,6 +9,13 @@
     \label{fig:real_robot}
 \end{figure*}
 
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/real_robot_setup.png}
+    \caption{Real Robot Experiment Platform Setup.}
+    \label{fig:platform}
+\end{figure*}
+
 We design four real-world tasks (Figure~\ref{fig:real_robot}), \textit{PutFruits}, \textit{TrackCube}, \textit{RepickBlock}, and \textit{DrawPattern}, to mirror four simulation tasks, \textit{BinFill}, \textit{VideoUnmask(Swap)}, \textit{VideoRepick}, and \textit{PatternLock}, respectively.
 \begin{itemize}
 \item \textbf{\textit{PutFruits}.} The robot transfers a specified number of fruits from a basket to a bin. During execution, a human may intervene by removing placed fruits or adding new ones, preventing the robot from relying solely on immediate perception and requiring it to track progress over time.
@@ -29,18 +36,11 @@ To assess whether the trends observed on \benchname\xspace transfer to physical 
 \texttt{QwenVL} is trained using the same configuration as in simulation. The subgoal annotation for \textit{PutFruits} and \textit{DrawPattern} tasks does not contain grounding information.
 All other hyperparameters remain unchanged, except that we set the total number of training steps to 50k.
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/real_robot_setup.png}
-    \caption{Real Robot Experiment Platform Setup.}
-    \label{fig:platform}
-\end{figure}
-
 \begin{table}[t]
     \centering
-    \setlength{\tabcolsep}{3pt}
+    \setlength{\tabcolsep}{4pt}
     \renewcommand{\arraystretch}{0.95}
-    \resizebox{\linewidth}{!}{
+    \small
     \begin{tabular}{l llll c}
 \toprule
 \textbf{Method} &
@@ -66,7 +66,6 @@ $\pi_{0.5}$
 
 \bottomrule
 \end{tabular}
-    }
     \caption{Real-world experiment results.}
     \label{tab:real}
 \end{table}
