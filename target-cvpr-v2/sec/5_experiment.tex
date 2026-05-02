@@ -64,9 +64,10 @@ We conduct a human study by reformulating each task as an \textit{online VideoQA
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{images/task_memory_correspondence.pdf}
+    \includegraphics[width=0.92\linewidth,trim=0 6pt 0 6pt,clip]{images/task_memory_correspondence.pdf}
     \caption{Performance comparison across task characteristics.}
     \label{fig:task_memory_correspondence}
+    \vspace{-6pt}
 \end{figure}
 
 \noindent{\bf \Q: How does the effectiveness of different memory designs depend on task characteristics?}
@@ -82,9 +83,10 @@ As shown in \cref{fig:task_memory_correspondence}, perceptual memory (\textsc{Fr
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{images/flops_compare.pdf}
+    \includegraphics[width=\linewidth,trim=0 4pt 0 4pt,clip]{images/flops_compare.pdf}
     \caption{Efficiency-performance comparison among models.}
     \label{fig:model_comparison}
+    \vspace{-8pt}
 \end{figure}
 
 \noindent{\bf \Q: How does memory affect the efficiency-performance balance of memory-augmented policies?}
@@ -95,6 +97,8 @@ As shown in \cref{fig:model_comparison}, perceptual memory achieves the most fav
 
 \begin{table}[t]
     \centering
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\arraystretch}{0.95}
     \resizebox{\linewidth}{!}{
     \begin{tabular}{l llll c}
 \toprule
@@ -124,6 +128,7 @@ $\pi_{0.5}$
     }
     \caption{Real-world experiment results.}
     \label{tab:real}
+    \vspace{-8pt}
 \end{table}
 
 \noindent{\bf \Q: Do the trends observed on \benchname\xspace transfer to real-world robotic manipulation?}

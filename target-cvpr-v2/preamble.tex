@@ -157,3 +157,14 @@
 \newtheorem{remark}[theorem]{Remark}
 
 \hyphenation{pre-print}
+
+%% --- Tighter float / caption spacing to reclaim space on the 8-page body ---
+%% (titlesec was tried and reverted — it leaks the spacing length into
+%%  the rendered heading text when combined with cvpr.sty's section overrides.)
+\setlength{\textfloatsep}{4pt plus 1pt minus 1pt}
+\setlength{\dbltextfloatsep}{4pt plus 1pt minus 1pt}
+\setlength{\floatsep}{4pt plus 1pt minus 1pt}
+\setlength{\dblfloatsep}{4pt plus 1pt minus 1pt}
+\setlength{\intextsep}{4pt plus 1pt minus 1pt}
+\captionsetup{aboveskip=2pt,belowskip=0pt}
+\captionsetup[sub]{aboveskip=2pt,belowskip=0pt}
