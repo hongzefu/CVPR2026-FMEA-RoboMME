@@ -1,0 +1,159 @@
+%% This file contains the additional packages and custom macros migrated from
+%% the original arXiv version (cmu document class) to the CVPR 2026 template.
+%% Packages already loaded by cvpr.sty (times, xspace, xcolor[dvipsnames],
+%% graphicx, amsmath, amssymb, booktabs, natbib, caption, subcaption, url,
+%% color, lineno, cleveref, enumitem) are not re-imported here.
+
+%%
+%% Inline annotations
+%%
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\todo}[1]{{\color{red}#1}}
+\newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
+%% Disabled for blind-review submission: keep TODO/todo silent in case any
+%% accidental call survives in the source tree.
+\renewcommand{\TODO}[1]{}
+\renewcommand{\todo}[1]{#1}
+
+%%
+%% Math / typesetting packages
+%%
+\usepackage{microtype}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{nicefrac}
+\usepackage{dsfont}
+\usepackage{bbm}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{xr}
+
+%%
+%% Tables / figures
+%%
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{rotating}
+\usepackage{arydshln}
+\usepackage{colortbl}
+\usepackage[export]{adjustbox}
+\usepackage{wrapfig}
+\usepackage{pifont}
+\usepackage{soul}
+
+%%
+%% Code / boxes
+%%
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+%%
+%% Algorithms
+%%
+\usepackage{algpseudocode}
+\usepackage{setspace}
+
+%%
+%% hypcap is intentionally not loaded here; it must come after hyperref and is
+%% unnecessary for the CVPR review ruler.
+
+%% --- Dashed lines tuning (arydshln) ---
+\setlength{\dashlinedash}{2pt}
+\setlength{\dashlinegap}{2pt}
+
+%% --- Colored check / cross symbols and helpers ---
+\newcommand{\cmark}{\textcolor{green!60!black}{\ding{51}}}
+\newcommand{\xmark}{\textcolor{red!70!black}{\ding{55}}}
+\definecolor{softred}{RGB}{200,10,10}
+\newcommand{\best}[1]{\textbf{\textcolor{softred}{#1}}}
+\newcommand{\pmstd}[1]{\scriptsize{\,\ensuremath{\pm}\,#1}}
+\newcommand{\task}[2]{\makecell{\text{{#1}}\\\text{{#2}}}}
+\newcommand{\meth}[2]{\makecell[l]{\texttt{#1}\\\texttt{#2}}}
+\newcommand{\mone}[1]{\makecell[l]{\texttt{#1}}}
+\newcommand{\mema}[2]{\makebox[2cm][l]{{#1}} #2}
+\newcommand{\memame}[2]{\makebox[2.8cm][l]{#1}  #2}
+
+\definecolor{rowgray}{gray}{0.96}
+\definecolor{cellred}{RGB}{230,30,30}
+\newcommand{\bestbest}[1]{\fcolorbox{red}{red!5}{\best{#1}}}
+\definecolor{headerblue}{RGB}{215,220,255}
+
+\newcounter{q}
+\newcommand{\Q}{Q\stepcounter{q}\arabic{q}}
+
+%% --- Project / task name macros ---
+\newcommand{\TSone}{\texttt{Counting}}
+\newcommand{\TStwo}{\texttt{Permanence}}
+\newcommand{\TSthree}{\texttt{Reference}}
+\newcommand{\TSfour}{\texttt{Imitation}}
+\newcommand{\benchname}{RoboMME}
+\newcommand{\modelname}{MME-VLA}
+\newcommand{\trainsteps}{770k}
+
+%% --- Color palette used in figures and listings ---
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{rliableolive}{HTML}{BBCC33}
+\definecolor{rliableblue}{HTML}{77AADD}
+\definecolor{rliablered}{HTML}{EE8866}
+\definecolor{myblue}{rgb}{0.1,0.4,0.9}
+\definecolor{lightblue}{rgb}{0.22,0.45,0.70}
+\definecolor{figurebackground}{HTML}{F9F8F3}
+
+\definecolor{highlightmistake}{RGB}{255, 179, 179}
+\definecolor{highlightcorrect}{RGB}{179, 255, 179}
+
+%% --- Listings (JSON style) ---
+\lstdefinelanguage{json}{
+  morestring=[b]",
+  stringstyle=\ttfamily,
+  showstringspaces=false,
+  breaklines=true,
+  basicstyle=\ttfamily\footnotesize,
+  keywords={true,false,null},
+  keywordstyle=\bfseries,
+}
+
+\lstset{
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=none,
+  xleftmargin=0pt,
+  aboveskip=0pt,
+  belowskip=0pt,
+}
+
+%% --- AI box (used for "Key Takeaways" callouts) ---
+\tcbset{
+  aibox/.style={
+    width=\linewidth,
+    top=8pt,
+    bottom=4pt,
+    colback=figurebackground,
+    colframe=black,
+    colbacktitle=black,
+    enhanced,
+    center,
+    attach boxed title to top left={yshift=-0.1in,xshift=0.15in},
+    boxed title style={boxrule=0pt,colframe=white,},
+  }
+}
+\newtcolorbox{AIbox}[2][]{aibox,title=#2,#1}
+
+%% --- Theorem-style environments ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\hyphenation{pre-print}
