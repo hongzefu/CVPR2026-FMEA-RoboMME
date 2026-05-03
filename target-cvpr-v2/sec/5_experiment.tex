@@ -58,9 +58,10 @@ MemER, the strongest compared method, achieves 42.38\% success and excels on \te
 
 \noindent{\bf \Q: Is high-level symbolic reasoning alone sufficient for memory-augmented manipulation?}
 It depends on the specific task. As an upper bound of symbolic memory, \textsc{GroundSG}+\texttt{Oracle} successfully solves many tasks, confirming that language provides strong representational capacity for high-level reasoning. However, performance still degrades on manipulation-intensive tasks such as \textit{StopCube} and \textit{InsertPeg}, where language offers limited guidance and precise visuomotor control becomes the primary bottleneck. The policy also struggles in cluttered scenes, often manipulating wrong objects and causing unintended collisions in  \textit{BinFill} and \textit{PickHighlight} despite unambiguous subgoals.
+We also conducted a human study by reformulating each task as an \textit{online VideoQA} problem, achieving 90.5\% overall success but still fail to fully solve the benchmark(\cref{sec:human}).
 
-\noindent{\bf \Q: How do humans perform on \benchname?}
-We conduct a human study by reformulating each task as an \textit{online VideoQA} problem. Execution videos are revealed incrementally, participants select the next high-level action from a predefined candidate set, and an oracle planner guarantees flawless low-level control (\cref{sec:human}). Humans achieve 90.5\% overall success but still fail to fully solve the benchmark, making consistent errors on long-horizon tasks such as \textit{PatternLock} and time-sensitive tasks like \textit{StopCube}. These results indicate that \benchname\xspace remains inherently challenging and places strong demands on memory, serving as a rigorous testbed for memory-augmented policies.
+% \noindent{\bf \Q: How do humans perform on \benchname?}
+% We conduct a human study by reformulating each task as an \textit{online VideoQA} problem. Execution videos are revealed incrementally, participants select the next high-level action from a predefined candidate set, and an oracle planner guarantees flawless low-level control (\cref{sec:human}). Humans achieve 90.5\% overall success but still fail to fully solve the benchmark, making consistent errors on long-horizon tasks such as \textit{PatternLock} and time-sensitive tasks like \textit{StopCube}. These results indicate that \benchname\xspace remains inherently challenging and places strong demands on memory, serving as a rigorous testbed for memory-augmented policies.
 
 
 \begin{figure}[t]
