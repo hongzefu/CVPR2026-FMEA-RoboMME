@@ -10,16 +10,17 @@
 \resizebox{\textwidth}{!}{
 \begin{tabular}{l p{1.0cm} c p{2.7cm} p{12cm}}
 \toprule
-\multirow{2}{*}{\makecell[l]{\textbf{Task}\\ \textbf{Name}}} &
+\multirow{2}{*}{\makecell[l]{\hspace*{-6pt}\textbf{Task}\\ \hspace*{-6pt}\textbf{Name}}} &
 \multirow{2}{*}{\makecell[c]{\hspace*{-10pt}\textbf{Memory}\\ \hspace*{-10pt}\textbf{Type}}} &
-\multirow{2}{*}{\makecell[c]{\textbf{Avg.}\\ \textbf{\#Steps}}} &
-\multirow{2}{*}{\makecell[l]{\textbf{Task}\\ \textbf{Challenge}}} &
-\multirow{2}{*}{\makecell[l]{\textbf{Brief}\\ \textbf{Description}}} \\
+\multirow{2}{*}{\makecell[c]{\hspace*{-6pt}\textbf{Avg.}\\ \hspace*{-6pt}\textbf{\#Steps}}} &
+\multirow{2}{*}{\makecell[l]{\hspace*{-6pt}\textbf{Task}\\ \hspace*{-6pt}\textbf{Challenge}}} &
+\multirow{2}{*}{\makecell[l]{\hspace*{-6pt}\textbf{Brief}\\ \hspace*{-6pt}\textbf{Description}}} \\
 & & & & \\
 \midrule
 
 % ================= Counting =================
-\multicolumn{3}{l}{\texttt{Task Suite: \TSone}} &  \\
+\noalign{\vskip -3pt}
+\multicolumn{5}{l}{\texttt{Task Suite: \TSone}} \\[-3pt]
 
 {PickXTimes} & T & 538 &  \text{count} &
 Pick and place a cube of a given color for a specified number of repetitions. \\
@@ -37,7 +38,8 @@ Press a button \textit{exactly} when a moving cube reaches the target at a speci
 \midrule
 
 % ================= Persistence =================
-\multicolumn{3}{l}{\texttt{Task Suite: \TStwo}} &  \\
+\noalign{\vskip -3pt}
+\multicolumn{5}{l}{\texttt{Task Suite: \TStwo}} \\[-3pt]
 VideoUnmask & S & 217  & \text{occlusion} &
 Given a video in which all cubes are masked, uncover the cube of a specified  color.\\
 
@@ -53,7 +55,8 @@ Press the button, during which all cubes are masked and containers dynamically s
 \midrule
 
 % ================= Reference =================
-\multicolumn{3}{l}{\texttt{Task Suite: \TSthree}} &  \\
+\noalign{\vskip -3pt}
+\multicolumn{5}{l}{\texttt{Task Suite: \TSthree}} \\[-3pt]
 
 PickHighlight & O & 346  & \text{visual-referential} &
 Pick up all cubes that were visually highlighted in a short time during interaction. \\
@@ -74,8 +77,9 @@ Given a video showing cube placement across multiple targets, place the cube on 
 \midrule
 
 % ================= Behavior =================
-\multicolumn{3}{l}{\texttt{Task Suite: \TSfour}} &  \\
-MoveCube & P & 394  & \text{contact-mode},\quad\quad \text{tool-use} &
+\noalign{\vskip -3pt}
+\multicolumn{5}{l}{\texttt{Task Suite: \TSfour}} \\[-3pt]
+MoveCube & P & 394  & \text{contact-mode},\hspace{4pt}\text{tool-use} &
 Given a video showing cube transport, replicate the same demonstrated manipulation strategy (e.g., \textit{pick-and-place, pushing with the gripper, or hooking with a stick}).  \\
 
 \rowcolor{rowgray} InsertPeg & P + O & 479  & \text{precise-motion} &
