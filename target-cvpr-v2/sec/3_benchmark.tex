@@ -8,63 +8,55 @@
 \renewcommand{\arraystretch}{1.15}
 
 \resizebox{\textwidth}{!}{
-\begin{tabular}{l c c p{2.7cm} p{12cm}}
+\begin{tabular}{>{\centering\arraybackslash}p{2cm}|l c c p{2.7cm} p{12cm}}
 \toprule
-\textbf{Task Name} & \textbf{Memory Type} & \textbf{Avg. \#Steps} & \textbf{Task Challenge} & \textbf{Brief Description} \\
+ & \textbf{Task Name} & \textbf{Memory Type} & \textbf{Avg. \#Steps} & \textbf{Task Challenge} & \textbf{Brief Description} \\
 \midrule
 
 % ================= Counting =================
-\noalign{\vskip -3pt}
-\multicolumn{5}{l}{\texttt{Task Suite: \TSone}} \\[-3pt]
-
-{PickXTimes} & T & 538 &  \text{count} &
+\multirow{4}{*}{\TSone} & {PickXTimes} & T & 538 &  \text{count} &
 Pick and place a cube of a given color for a specified number of repetitions. \\
 
-\rowcolor{rowgray} BinFill & T & 604 & \text{count} &
+\rowcolor{rowgray}\cellcolor{white} & BinFill & T & 604 & \text{count} &
 Place a specified number of cubes of a given color into the bin as the cubes appear over time. \\
 
 
-{SwingXTimes} & T & 435 & \text{count, swing-motion} &
+& {SwingXTimes} & T & 435 & \text{count, swing-motion} &
 Swing a cube back and forth between two targets for a specified number of cycles. \\
 
-\rowcolor{rowgray}{StopCube} & T & 317 &\text{count, time-critical} &
+\rowcolor{rowgray}\cellcolor{white} & {StopCube} & T & 317 &\text{count, time-critical} &
 Press a button \textit{exactly} when a moving cube reaches the target at a specified occurrence. \\
 
 \midrule
 
 % ================= Persistence =================
-\noalign{\vskip -3pt}
-\multicolumn{5}{l}{\texttt{Task Suite: \TStwo}} \\[-3pt]
-VideoUnmask & S & 217  & \text{occlusion} &
+\multirow{4}{*}{\TStwo} & VideoUnmask & S & 217  & \text{occlusion} &
 Given a video in which all cubes are masked, uncover the cube of a specified  color.\\
 
-\rowcolor{rowgray}ButtonUnmask & S & 267  & \text{occlusion} &
+\rowcolor{rowgray}\cellcolor{white} & ButtonUnmask & S & 267  & \text{occlusion} &
 Press the button, during which all cubes are masked, then uncover the cube of a specified  color.\\
 
-VideoUnmaskSwap & S & 348  & \text{occlusion, tracking} &
+& VideoUnmaskSwap & S & 348  & \text{occlusion, tracking} &
 Given a video in which all cubes are masked and containers dynamically swap positions, uncover the cube of a specified  color. \\
 
-\rowcolor{rowgray}ButtonUnmaskSwap & S & 400 & \text{occlusion, tracking} &
+\rowcolor{rowgray}\cellcolor{white} & ButtonUnmaskSwap & S & 400 & \text{occlusion, tracking} &
 Press the button, during which all cubes are masked and containers dynamically swap positions, then uncover the cube of a specified  color. \\
 
 \midrule
 
 % ================= Reference =================
-\noalign{\vskip -3pt}
-\multicolumn{5}{l}{\texttt{Task Suite: \TSthree}} \\[-3pt]
-
-PickHighlight & O & 346  & \text{visual-referential} &
+\multirow{4}{*}{\TSthree} & PickHighlight & O & 346  & \text{visual-referential} &
 Pick up all cubes that were visually highlighted in a short time during interaction. \\
 
-\rowcolor{rowgray}
+\rowcolor{rowgray}\cellcolor{white} &
 VideoRepick & O + T & 687  & \text{action-referential}, \text{tracking, count} &
 Given a video showing a cube being manipulated and relocated, pick up the same cube for a specified number of repetitions.\\
 
-VideoPlaceButton & O + T & 974  & \text{language-referential}, \text{long-video, tracking} &
+& VideoPlaceButton & O + T & 974  & \text{language-referential}, \text{long-video, tracking} &
 Given a video with interleaved cube placement and button pressing, place the cube on the target specified by a language-described temporal reference (e.g., \textit{the target after pressing the button}). \\
 
 
-\rowcolor{rowgray}
+\rowcolor{rowgray}\cellcolor{white} &
 VideoPlaceOrder & O + T & 1134  & \text{language-referential}, \text{long-video, tracking} &
 Given a video showing cube placement across multiple targets, place the cube on the target specified by a language-described ordinal reference (e.g., \textit{the second target}). \\
 
@@ -72,19 +64,17 @@ Given a video showing cube placement across multiple targets, place the cube on 
 \midrule
 
 % ================= Behavior =================
-\noalign{\vskip -3pt}
-\multicolumn{5}{l}{\texttt{Task Suite: \TSfour}} \\[-3pt]
-MoveCube & P & 394  & \text{contact-mode},\hspace{4pt}\text{tool-use} &
+\multirow{4}{*}{\TSfour} & MoveCube & P & 394  & \text{contact-mode},\hspace{4pt}\text{tool-use} &
 Given a video showing cube transport, replicate the same demonstrated manipulation strategy (e.g., \textit{pick-and-place, pushing with the gripper, or hooking with a stick}).  \\
 
-\rowcolor{rowgray} InsertPeg & P + O & 479  & \text{precise-motion} &
+\rowcolor{rowgray}\cellcolor{white} & InsertPeg & P + O & 479  & \text{precise-motion} &
 Given a video showing peg insertion, grasp the same peg at the same end and insert it into a box following the same demonstrated direction. \\
 
 
-PatternLock & P & 208  & \text{linear-motion} &
+& PatternLock & P & 208  & \text{linear-motion} &
 Given a video showing a linear moving pattern, reproduce the same trajectory on the targets. \\
 
-\rowcolor{rowgray} RouteStick & P & 370  &  \text{circular-motion} &
+\rowcolor{rowgray}\cellcolor{white} & RouteStick & P & 370  &  \text{circular-motion} &
 Given a video showing a circular routing pattern, reproduce the same trajectory around sticks. \\
 
 \bottomrule
