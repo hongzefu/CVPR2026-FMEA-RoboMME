@@ -1,7 +1,7 @@
 \section{Experiments}
 \label{sec:experiments}
 
-In this section, we systematically evaluate all \modelname\xspace variants under controlled settings, first outlining the experimental setup and then analyzing the main results.
+%In this section, we systematically evaluate all \modelname\xspace variants under controlled settings, first outlining the experimental setup and then analyzing the main results.
 
 \subsection{Experiment Setup}
 We evaluate a total of 14 VLA policies in the MME-VLA suite, along with 4 prior methods, for a systematic comparison. Implementation details are provided in \cref{sec:appx_imp_detail}.
@@ -11,7 +11,7 @@ For symbolic memory, we fine-tune two $\pi_{0.5}$ variants, \textsc{SimpleSG} an
 \texttt{QwenVL} is fine-tuned on subgoal annotations in our dataset to predict the next subgoal given the current image and the accumulated subgoal history, whereas \texttt{Gemini} relies solely on prompt engineering without task-specific fine-tuning.
 For perceptual memory, we use token dropping (\textsc{TokenDrop}) or frame sampling (\textsc{FrameSamp}), each combined with three integration mechanisms: memory-as-context (\texttt{Context}), memory-as-modulator (\texttt{Modul}), and memory-as-expert (\texttt{Expert}), resulting in six additional $\pi_{0.5}$ variants.
 For recurrent memory, we adopt \textsc{TTT} or \textsc{RMT} with the same integration strategies, also  producing six additional policies.
-Unless otherwise specified, we denote each variant as ``\textsc{Method}+\texttt{Integration/VLM}'', e.g., \textsc{FrameSamp}+\texttt{Modul} or \textsc{SimpleSG}+\texttt{QwenVL}.
+Unless otherwise specified, we denote each variant as ``\textsc{Method}+\texttt{Integration/VLM}'', e.g., \textsc{FrameSamp}+\texttt{Modul} or \textsc{SimpleSG}+\texttt{QwenVL}.x
 
 \noindent{\bf Evaluation Protocols.}
 For fair comparison across our \modelname\xspace models, we fix a memory budget of 512 tokens, matching the number of image tokens in the current observation, e.g., both the learnable tokens in \textsc{RMT} and the sampled tokens in \textsc{TokenDrop} are capped at this limit.
@@ -22,7 +22,7 @@ We compare against three methods:
 (1) $\pi_{0.5}$, which conditions only on the current observation without any memory;
 (2) SAM2Act+ \cite{fang2025sam2act}, which adopts SAM2 as a backbone to provide perceptual memory through a memory bank and predicts discrete keyframe actions that are executed by an external motion planner;
 (3) MemER \cite{sridhar2025memer}, which employs a VLM to infer symbolic subgoals from accumulated keyframe images and execute them with a VLA.
-Unlike our symbolic variants, which condition only on the current image and subgoal history at each step, MemER selects keyframes from the most recent $N$ images during execution and predicts symbolic subgoals using a buffer that stores all previously selected keyframe images. It can therefore be viewed as a hybrid of perceptual and symbolic memory. When reproducing MemER, we follow their original prompts to fine-tune an additional Qwen3-VL-4B model on grounded subgoal and keyframe annotations, and execute the predicted subgoals with the \textsc{GroundSG} policy.
+Unlike our symbolic variants, which condition only on the current image and subgoal history at each step, MemER selects keyframes from the most recent $N$ images during execution and predicts symbolic subgoals using all previously selected keyframe images. It can therefore be viewed as a hybrid of perceptual and symbolic memory. When reproducing MemER, we follow their original prompts to fine-tune an additional Qwen3-VL-4B model on grounded subgoal and keyframe annotations, and execute the predicted subgoals with the \textsc{GroundSG} policy.
 All prior methods are also trained as a single multi-task policy over the 16 tasks, and evaluated over three runs. We leave the inclusion of additional methods to future work.
 
 
@@ -50,7 +50,7 @@ In contrast, our symbolic variants achieve up to 32.70\% success, with \textsc{G
 On simpler tasks such as \textit{PickXTimes}, where grounding is less critical, \textsc{SimpleSG} can outperform \textsc{GroundSG}, as grounding errors from \texttt{QwenVL} degrade performance.
 Without fine-tuning, prompt-only \texttt{Gemini} suffers from domain shift and often predicts incorrect labels, further reducing performance.
 
-SAM2Act+ performs poorly on average but achieves the best result on \textit{ButtonUnmaskSwap}, as it uses a motion planner to execute discrete actions reliably and is therefore less prone to low-level manipulation failures.
+SAM2Act+ performs poorly on average but achieves the best result on \textit{ButtonUnmaskSwap}, as it uses a motion planner to execute discrete actions reliably. %and is therefore less prone to low-level manipulation failures.
 In contrast, VLA policies sometimes fail to press buttons correctly.
 MemER, the strongest compared method, achieves 42.38\% success and excels on \textit{ButtonUnmask} and \textit{PickHighlight}, showing the benefit of combining  memory representations, where gains arise from maintaining keyframes to preserve long visual histories while using symbolic subgoals.
 
@@ -72,7 +72,8 @@ We also conducted a human study by reformulating each task as an \textit{online 
 \end{figure}
 
 \noindent{\bf \Q: How does the effectiveness of different memory designs depend on task characteristics?}
-No single memory representation consistently dominates across all tasks. Instead, their strengths are highly task-dependent and complementary.
+No single memory representation consistently dominates across all tasks. 
+%Instead, their strengths are highly task-dependent and complementary.
 Symbolic memory performs well on several \TSone\xspace tasks, such as \textit{BinFill} and \textit{PickXTimes}.
 Perceptual memory excels on \TSfour\xspace tasks, including \textit{PatternLock} and \textit{RouteStick}.
 However, no method fully solves an entire task suite, suggesting that task demands cannot be captured by a simple one-to-one correspondence between cognitive dimensions and memory representations.
