@@ -1,7 +1,7 @@
 \section{Experiments}
 \label{sec:experiments}
 
-%In this section, we systematically evaluate all \modelname\xspace variants under controlled settings, first outlining the experimental setup and then analyzing the main results.
+In this section, we systematically evaluate all \modelname\xspace variants under controlled settings.
 
 \subsection{Experiment Setup}
 We evaluate a total of 14 VLA policies in the MME-VLA suite, along with 4 prior methods, for a systematic comparison. Implementation details are provided in \cref{sec:appx_imp_detail}.
@@ -76,7 +76,8 @@ No single memory representation consistently dominates across all tasks.
 %Instead, their strengths are highly task-dependent and complementary.
 Symbolic memory performs well on several \TSone\xspace tasks, such as \textit{BinFill} and \textit{PickXTimes}.
 Perceptual memory excels on \TSfour\xspace tasks, including \textit{PatternLock} and \textit{RouteStick}.
-However, no method fully solves an entire task suite, suggesting that task demands cannot be captured by a simple one-to-one correspondence between cognitive dimensions and memory representations.
+%However, no method fully solves an entire task suite, suggesting that task demands cannot be captured by a simple one-to-one correspondence between cognitive dimensions and memory representations.
+However, no method solves any suite entirely, suggesting that cognitive dimensions do not map one-to-one onto memory representations.
 
 To better analyze the effectiveness of memory representations, we group the 16 tasks by their primary functional requirements: \textit{Motion-Centric}, \textit{Time-Sensitive}, \textit{Short-Horizon Video Reasoning}, \textit{Long-Horizon Video Reasoning}, \textit{Dynamic Scene-Change} and \textit{Event-Salient}.
 More detailed descriptions are provided in \cref{sec:result_task_function}.
@@ -132,6 +133,6 @@ As shown in \cref{fig:model_comparison}, perceptual memory achieves the most fav
 
 \noindent{\bf \Q: Do the trends observed on \benchname\xspace transfer to real-world robotic manipulation?}
 Yes. We evaluate four real-world tasks, \textit{PutFruits}, \textit{TrackCube}, \textit{RepickBlock}, and \textit{DrawPattern}, designed to mirror the \textit{BinFill}, \textit{VideoUnmask(Swap)}, \textit{VideoRepick} and \textit{PatternLock} tasks in simulation.
-We collect a total of 350 demonstrations and test our strongest symbolic (\textsc{GroundSG}+\texttt{QwenVL}) and perceptual (\textsc{FrameSamp}+\texttt{Modul}) models to assess whether trends can transfer to physical settings.
+We collect 350 demonstrations and test our strongest symbolic (\textsc{GroundSG}+\texttt{QwenVL}) and perceptual (\textsc{FrameSamp}+\texttt{Modul}) models to assess whether trends can transfer to physical settings.
 As shown in Table~\ref{tab:real}, the results exhibit similar patterns. Symbolic memory performs best on the counting task \textit{PutFruits}, whereas perceptual memory excels on motion-centric tasks such as \textit{DrawPattern}. On the remaining two tasks, both approaches achieve comparable performance, suggesting room for further improvement.
 Additional details are provided in Appendix~\ref{sec:appx_real_robot}.
