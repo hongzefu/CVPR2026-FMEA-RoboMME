@@ -34,6 +34,7 @@
 %%
 \usepackage{multirow}
 \usepackage{makecell}
+\usepackage{seqsplit}
 \usepackage{rotating}
 \usepackage{arydshln}
 \usepackage{colortbl}
@@ -74,6 +75,8 @@
 \newcommand{\mone}[1]{\makecell[l]{\texttt{#1}}}
 \newcommand{\mema}[2]{\makebox[2cm][l]{{#1}} #2}
 \newcommand{\memame}[2]{\makebox[2.8cm][l]{#1}  #2}
+\newcommand{\wrapttlabel}[1]{\centering\arraybackslash\ttfamily\seqsplit{#1}}
+\newcommand{\wrapbflabel}[1]{\centering\arraybackslash\bfseries\seqsplit{#1}}
 
 \definecolor{rowgray}{gray}{0.96}
 \definecolor{cellred}{RGB}{230,30,30}

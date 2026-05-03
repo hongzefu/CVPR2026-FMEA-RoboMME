@@ -14,7 +14,7 @@
 \midrule
 
 % ================= Counting =================
-\multirow{4}{*}{\TSone} & {PickXTimes} & T & 538 &  \text{count} &
+& {PickXTimes} & T & 538 &  \text{count} &
 Pick and place a cube of a given color for a specified number of repetitions. \\
 
 \rowcolor{rowgray}\cellcolor{white} & BinFill & T & 604 & \text{count} &
@@ -24,13 +24,13 @@ Place a specified number of cubes of a given color into the bin as the cubes app
 & {SwingXTimes} & T & 435 & \text{count, swing-motion} &
 Swing a cube back and forth between two targets for a specified number of cycles. \\
 
-\rowcolor{rowgray}\cellcolor{white} & {StopCube} & T & 317 &\text{count, time-critical} &
+\rowcolor{rowgray}\cellcolor{white}\multirow{-4}{=}{\wrapttlabel{Counting}} & {StopCube} & T & 317 &\text{count, time-critical} &
 Press a button \textit{exactly} when a moving cube reaches the target at a specified occurrence. \\
 
 \midrule
 
 % ================= Persistence =================
-\multirow{4}{*}{\TStwo} & VideoUnmask & S & 217  & \text{occlusion} &
+& VideoUnmask & S & 217  & \text{occlusion} &
 Given a video in which all cubes are masked, uncover the cube of a specified  color.\\
 
 \rowcolor{rowgray}\cellcolor{white} & ButtonUnmask & S & 267  & \text{occlusion} &
@@ -39,13 +39,13 @@ Press the button, during which all cubes are masked, then uncover the cube of a 
 & VideoUnmaskSwap & S & 348  & \text{occlusion, tracking} &
 Given a video in which all cubes are masked and containers dynamically swap positions, uncover the cube of a specified  color. \\
 
-\rowcolor{rowgray}\cellcolor{white} & ButtonUnmaskSwap & S & 400 & \text{occlusion, tracking} &
+\rowcolor{rowgray}\cellcolor{white}\multirow{-4}{=}{\wrapttlabel{Permanence}} & ButtonUnmaskSwap & S & 400 & \text{occlusion, tracking} &
 Press the button, during which all cubes are masked and containers dynamically swap positions, then uncover the cube of a specified  color. \\
 
 \midrule
 
 % ================= Reference =================
-\multirow{4}{*}{\TSthree} & PickHighlight & O & 346  & \text{visual-referential} &
+& PickHighlight & O & 346  & \text{visual-referential} &
 Pick up all cubes that were visually highlighted in a short time during interaction. \\
 
 \rowcolor{rowgray}\cellcolor{white} &
@@ -56,7 +56,7 @@ Given a video showing a cube being manipulated and relocated, pick up the same c
 Given a video with interleaved cube placement and button pressing, place the cube on the target specified by a language-described temporal reference (e.g., \textit{the target after pressing the button}). \\
 
 
-\rowcolor{rowgray}\cellcolor{white} &
+\rowcolor{rowgray}\cellcolor{white}\multirow{-4}{=}{\wrapttlabel{Reference}} &
 VideoPlaceOrder & O + T & 1134  & \text{language-referential}, \text{long-video, tracking} &
 Given a video showing cube placement across multiple targets, place the cube on the target specified by a language-described ordinal reference (e.g., \textit{the second target}). \\
 
@@ -64,7 +64,7 @@ Given a video showing cube placement across multiple targets, place the cube on 
 \midrule
 
 % ================= Behavior =================
-\multirow{4}{*}{\TSfour} & MoveCube & P & 394  & \text{contact-mode},\hspace{4pt}\text{tool-use} &
+& MoveCube & P & 394  & \text{contact-mode},\hspace{4pt}\text{tool-use} &
 Given a video showing cube transport, replicate the same demonstrated manipulation strategy (e.g., \textit{pick-and-place, pushing with the gripper, or hooking with a stick}).  \\
 
 \rowcolor{rowgray}\cellcolor{white} & InsertPeg & P + O & 479  & \text{precise-motion} &
@@ -74,7 +74,7 @@ Given a video showing peg insertion, grasp the same peg at the same end and inse
 & PatternLock & P & 208  & \text{linear-motion} &
 Given a video showing a linear moving pattern, reproduce the same trajectory on the targets. \\
 
-\rowcolor{rowgray}\cellcolor{white} & RouteStick & P & 370  &  \text{circular-motion} &
+\rowcolor{rowgray}\cellcolor{white}\multirow{-4}{=}{\wrapttlabel{Imitation}} & RouteStick & P & 370  &  \text{circular-motion} &
 Given a video showing a circular routing pattern, reproduce the same trajectory around sticks. \\
 
 \bottomrule
