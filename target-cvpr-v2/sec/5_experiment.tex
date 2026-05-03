@@ -15,7 +15,7 @@ Unless otherwise specified, we denote each variant as ``\textsc{Method}+\texttt{
 
 \noindent{\bf Evaluation Protocols.}
 For fair comparison across our \modelname\xspace models, we fix a memory budget of 512 tokens, matching the number of image tokens in the current observation, e.g., both the learnable tokens in \textsc{RMT} and the sampled tokens in \textsc{TokenDrop} are capped at this limit.
-Evaluation uses 50 episodes per task (800 total) with environment seeds distinct from training. We adopt a multi-task setup, training a single model across all tasks with a maximum of 1,300 steps per episode. Results are averaged over the last three checkpoints and three random seeds (nine runs total).
+Evaluation uses 50 episodes per task (800 total) with environment seeds distinct from training. For every method, both \modelname\xspace variants and prior methods, we adopt a unified multi-task training protocol: a single policy is jointly trained across all 16 tasks, with a maximum of 1,300 steps per episode. Results are averaged over the last three checkpoints and three random seeds (nine runs total).
 
 \noindent{\bf Prior Methods.}
 We compare against four methods:
@@ -24,7 +24,7 @@ We compare against four methods:
 (3) SAM2Act+ \cite{fang2025sam2act}, which adopts SAM2 as a backbone to provide perceptual memory through a memory bank and predicts discrete keyframe actions that are executed by an external motion planner;
 (4) MemER \cite{sridhar2025memer}, which employs a VLM to infer symbolic subgoals from accumulated keyframe images and execute them with a VLA.
 Unlike our symbolic variants, which condition only on the current image and subgoal history at each step, MemER selects keyframes from the most recent $N$ images during execution and predicts symbolic subgoals using a buffer that stores all previously selected keyframe images. It can therefore be viewed as a hybrid of perceptual and symbolic memory. When reproducing MemER, we follow their original prompts to fine-tune an additional Qwen3-VL-4B model on grounded subgoal and keyframe annotations, and execute the predicted subgoals with the \textsc{GroundSG} policy.
-All prior methods are evaluated over three runs. We leave the inclusion of additional methods to future work.
+All prior methods are also trained as a single multi-task policy over the 16 tasks, and evaluated over three runs. We leave the inclusion of additional methods to future work.
 
 
 \subsection{Main Results and Analysis}
