@@ -90,6 +90,39 @@ As shown in \cref{fig:task_memory_correspondence}, perceptual memory (\textsc{Fr
     \vspace{-4pt}
 \end{figure}
 
+\begin{table}[t]
+    \centering
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{l llll c}
+\toprule
+\textbf{Method} &
+\makecell[l]{{\textbf{Put}} \\ {\textbf{Fruits}}} &
+\makecell[l]{{\textbf{Track}} \\{\textbf{Cube}}}  &
+\makecell[l]{{\textbf{Repick}} \\ {\textbf{Block}}} &
+\makecell[l]{{\textbf{Draw}} \\ {\textbf{Pattern}}} &
+\textbf{\texttt{Total}} \\
+\midrule
+
+$\pi_{0.5}$
+& 2/10 & 1/10 & 1/10 & 0/10 & 4/40 \\
+
+\midrule
+
+\textsc{GroundSG} + \texttt{QwenVL}
+& \best{9/10} & 3/10 & 5/10 & 2/10 & 19/40 \\
+
+\midrule
+
+\textsc{FrameSamp} + \texttt{Modul}
+& 6/10 & \best{5/10} & \best{6/10} & \best{8/10} & \best{25/40} \\
+
+\bottomrule
+\end{tabular}
+    }
+    \caption{Real-world experiment results.}
+    \label{tab:real}
+\end{table}
+
 \noindent{\bf \Q: How does memory affect the efficiency-performance balance of memory-augmented policies?}
 Memory improves history dependence but inevitably introduces additional computational cost. To quantify this trade-off, we vary the memory budget (64-512 tokens) and compare efficiency-performance scaling across models.
 Computational cost is estimated from the TFLOPs of a single forward pass based on the average episode length.
@@ -97,4 +130,7 @@ As shown in \cref{fig:model_comparison}, perceptual memory achieves the most fav
 
 
 \noindent{\bf \Q: Do the trends observed on \benchname\xspace transfer to real-world robotic manipulation?}
-Yes. We evaluate four real-world tasks; see \cref{sec:appx_real_robot} for details.
+Yes. We evaluate four real-world tasks, \textit{PutFruits}, \textit{TrackCube}, \textit{RepickBlock}, and \textit{DrawPattern}, designed to mirror the \textit{BinFill}, \textit{VideoUnmask(Swap)}, \textit{VideoRepick} and \textit{PatternLock} tasks in simulation.
+We collect a total of 350 demonstrations and test our strongest symbolic (\textsc{GroundSG}+\texttt{QwenVL}) and perceptual (\textsc{FrameSamp}+\texttt{Modul}) models to assess whether trends can transfer to physical settings.
+As shown in Table~\ref{tab:real}, the results exhibit similar patterns. Symbolic memory performs best on the counting task \textit{PutFruits}, whereas perceptual memory excels on motion-centric tasks such as \textit{DrawPattern}. On the remaining two tasks, both approaches achieve comparable performance, suggesting room for further improvement.
+Additional details are provided in Appendix~\ref{sec:appx_real_robot}.
