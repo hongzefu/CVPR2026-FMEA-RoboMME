@@ -11,7 +11,7 @@ For symbolic memory, we fine-tune two $\pi_{0.5}$ variants, \textsc{SimpleSG} an
 \texttt{QwenVL} is fine-tuned on subgoal annotations in our dataset to predict the next subgoal given the current image and the accumulated subgoal history, whereas \texttt{Gemini} relies solely on prompt engineering without task-specific fine-tuning.
 For perceptual memory, we use token dropping (\textsc{TokenDrop}) or frame sampling (\textsc{FrameSamp}), each combined with three integration mechanisms: memory-as-context (\texttt{Context}), memory-as-modulator (\texttt{Modul}), and memory-as-expert (\texttt{Expert}), resulting in six additional $\pi_{0.5}$ variants.
 For recurrent memory, we adopt \textsc{TTT} or \textsc{RMT} with the same integration strategies, also  producing six additional policies.
-Unless otherwise specified, we denote each variant as ``\textsc{Method}+\texttt{Integration/VLM}'', e.g., \textsc{FrameSamp}+\texttt{Modul} or \textsc{SimpleSG}+\texttt{QwenVL}.x
+Unless otherwise specified, we denote each variant as ``\textsc{Method}+\texttt{Integration/VLM}'', e.g., \textsc{FrameSamp}+\texttt{Modul} or \textsc{SimpleSG}+\texttt{QwenVL}.
 
 \noindent{\bf Evaluation Protocols.}
 For fair comparison across our \modelname\xspace models, we fix a memory budget of 512 tokens, matching the number of image tokens in the current observation, e.g., both the learnable tokens in \textsc{RMT} and the sampled tokens in \textsc{TokenDrop} are capped at this limit.
