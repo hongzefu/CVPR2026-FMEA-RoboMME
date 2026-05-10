@@ -16,7 +16,7 @@ $I_t=(I^{1}_t,I^{2}_t,\dots)$:
 \boldsymbol{\ell} &= \mathrm{Tok}_{\text{text}}(l) \in \mathbb{R}^{N_\ell \times d}, \\
 \mathbf{o}_t &= \mathrm{Tok}_{\text{img}}(I_t) \in \mathbb{R}^{N_o \times d}.
 \end{align}
-Here $d$ is the token embedding dimension, $N_o$ and $N_o$ denote the total number of language and visual tokens, respectively. 
+Here $d$ is the token embedding dimension, $N_\ell$ and $N_o$ denote the total number of language and visual tokens, respectively. 
 
 \paragraph{Experts.}
 $\pi_{0.5}$ \cite{pi05} follows the $\pi_{0}$ design \cite{pi0} and adopts a multi-expert transformer architecture composed of:
@@ -255,8 +255,8 @@ Memory slots attend to each chunk and are updated recurrently:
 \begin{align}
 \mathbf{S}_t^{(m)}
 &= \mathrm{Transformer}\big(
-Q=\mathbf{S}_t^{(m-1)},,
-K=[\mathbf{o}_t^{(m)};\mathbf{S}_t^{(m-1)}],,
+Q=\mathbf{S}_t^{(m-1)},
+K=[\mathbf{o}_t^{(m)};\mathbf{S}_t^{(m-1)}],
 V=[\mathbf{o}_t^{(m)};\mathbf{S}_t^{(m-1)}]
 \big),
 \end{align}
