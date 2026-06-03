@@ -1,0 +1,82 @@
+\clearpage
+\setcounter{page}{1}
+\maketitlesupplementary
+
+\appendix
+
+\section*{Appendix Outline}
+\begin{itemize}
+
+\item \ref{sec:appx_model_design}. Model Architectures in the MME-VLA Suite
+    \begin{itemize}
+      \item \ref{sec:pi05}. Basic $\pi_{0.5}$ Architecture
+      \item \ref{sec:memory_repr}. Memory Representations
+      \item \ref{sec:memory_integration}. Memory Integration Mechanisms
+    \end{itemize}
+
+\item \ref{sec:appx_imp_detail}. Experiment Implementation Details on \benchname
+    \begin{itemize}
+        \item \ref{sec:sam2act}. Training Details for SAM2Act+
+        \item \ref{sec:VLM_subgoal}. VLM Subgoal Prediction and Prompts
+        \item \ref{sec:mme_vla_model}. Detailed Setups in \modelname\xspace Suite
+        \item \ref{sec:hyperpara}. Training Hyperparameters
+        \item \ref{sec:human}. Oracle Planner and Human Study
+    \end{itemize}
+\item \ref{sec:appx_full_results}. Full Results on \benchname
+    \begin{itemize}
+        \item \ref{sec:results_oracle_planner}. Results Using the Oracle Planner
+        \item \ref{sec:results_suite_breakdown}. Results Based on Each Task Suite
+        \item \ref{sec:result_task_function}. Results Based on Task Functional Requirements
+        \item \ref{sec:results_all_tasks}. Full Results on All Tasks
+    \end{itemize}
+\item \ref{sec:appx_real_robot}. Real Robot Experiment Details.
+
+\item \ref{sec:appx_task_desc}. Complete Task Description
+  \begin{itemize}
+      \item Task Suite \TSone
+        \begin{itemize}
+          \item \ref{sec:task_binfill}. BinFill
+          \item \ref{sec:task_pickxtimes}. PickXtimes
+          \item \ref{sec:task_swingxtimes}. SwingXtimes
+          \item \ref{sec:task_stopcube}. StopCube
+      \end{itemize}
+      \item Task Suite: \TStwo
+        \begin{itemize}
+              \item \ref{sec:task_videounmask}. VideoUnmask
+              \item \ref{sec:task_buttonunmask}. ButtonUnmask
+              \item \ref{sec:task_videounmaskswap}. VideoUnmaskSwap
+              \item \ref{sec:task_buttonunmaskswap}. ButtonUnmaskSwap
+        \end{itemize}
+    \item Task Suite: \TSthree
+        \begin{itemize}
+         \item \ref{sec:task_pickhighlight}. PickHighlight
+          \item \ref{sec:task_videorepick}. VideoRepick
+          \item \ref{sec:task_videoplacebutton}. VideoPlaceButton
+         \item \ref{sec:task_videoplaceorder}. VideoPlaceOrder
+    \end{itemize}
+    \item Task Suite: \TSfour
+        \begin{itemize}
+             \item \ref{sec:task_movecube}. MoveCube
+              \item \ref{sec:task_insertpeg}. InsertPeg
+              \item \ref{sec:task_patternlock}. PatternLock
+              \item \ref{sec:task_routestick}. RouteStick
+        \end{itemize}
+
+    \end{itemize}
+\end{itemize}
+
+
+\input{sec/appx/appx_model_design}
+\newpage
+
+\input{sec/appx/appx_imp_detail}
+\newpage
+
+\input{sec/appx/appx_full_result}
+\newpage
+
+\input{sec/appx/appx_real_robot}
+\newpage
+
+\input{sec/appx/appx_task_desc}
+\newpage

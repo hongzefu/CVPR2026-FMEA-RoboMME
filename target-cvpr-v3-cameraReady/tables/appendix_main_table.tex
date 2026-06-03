@@ -1,0 +1,131 @@
+
+% \begin{sidewaystable*}
+\begin{table*}[h]
+\centering
+\caption{Complete results are reported with mean and variance. 
+\best{Red} marks the best per section; \text{\tiny \raisebox{1ex}{\bestbest{}}} marks the overall best for non-oracle models.}
+\label{tab:two_block_four_suite}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.15}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lll *{8}{c}}
+\toprule
+
+% ===================== Block 1 header =====================
+\multirow{2}{*}{\textbf{Representation}} &
+\multirow{2}{*}{\textbf{Policy}} &
+\multirow{2}{*}{\makecell[c]{ \textbf{Integration/}\\\textbf{VLM Type}}} &
+\multicolumn{4}{c}{\textbf{\TSone}} &
+\multicolumn{4}{c}{\textbf{\TStwo}} \\
+\cmidrule(lr){4-7}\cmidrule(lr){8-11}
+& & &
+\textbf{BinFill} & \textbf{PickXTimes} & \textbf{SwingXTimes} & \textbf{StopCube} &
+\textbf{VideoUnmask} & \textbf{ButtonUnmask} & \textbf{VideoUnmaskSwap} & \textbf{ButtonUnmaskSwap} \\
+\midrule
+
+% ===================== Block 1 body (TOP part numbers) =====================
+\multirow{2}{*}{\textbf{Symbolic}}
+& \textsc{SimpleSG} & \texttt{Oracle}  & 85.78 ± 2.91 & 99.78 ± 0.67  & \best{100.0 ± 0.00} & 44.67 ± 22.25 & 33.11 ± 2.67 & 22.00 ± 3.06 & 15.56 ± 2.60 & 15.56 ± 3.84  \\
+& \textsc{GroundSG} & \texttt{Oracle}   & \best{\textbf{85.78 ± 1.67}} & \best{\textbf{100.00 ± 0.00}} & \best{\textbf{100.0 ± 0.00}} & \best{\textbf{49.67 ± 20.02}} & \best{\textbf{98.78 ± 1.04}} & \best{\textbf{95.00 ± 2.83}} & \best{\textbf{99.22 ± 1.04}} & \best{\textbf{80.22 ± 15.69}}  \\
+\midrule
+\multirow{4}{*}{\textbf{Symbolic}}
+& \textsc{SimpleSG} & \texttt{Gemini}   &   46.00 ± 7.14 & 63.00 ± 7.07 & \best{45.00 ± 4.24} & 2.00 ± 0.00 & 29.00 ± 1.41 & 9.00 ± 7.07 & 14.00 ± 2.83 & 2.00 ± 2.83 \\
+& \textsc{SimpleSG} & \texttt{QwenVL}   & \bestbest{77.56 ± 2.19} & \bestbest{95.33 ± 2.00} & 5.11 ± 1.45 & 0.44 ± 0.88 & 34.22 ± 3.53 & 19.33 ± 8.31 & 15.33 ± 2.83 & 9.56 ± 4.56  \\
+& \textsc{GroundSG} & \texttt{Gemini}  & 26.00 ± 8.49 & 18.00 ± 0.00 & 4.00 ± 0.00 & \best{3.00 ± 1.41} & 36.00 ± 0.00 & 14.00 ± 2.83 & 13.00 ± 1.41 & 0.00 ± 0.00 \\
+& \textsc{GroundSG} & \texttt{QwenVL}  & 52.00 ± 2.00 & 92.67 ± 3.06 & 7.33 ± 6.11 & 0.00 ± 0.00 & \bestbest{88.67 ± 1.15} & \best{24.00 ± 2.00} & \best{30.67 ± 1.15} & \best{14.00 ± 2.00} \\
+% \cmidrule(){2-11}
+% & Action History & Input & 26.80 ± 7.95 & 58.40 ± 9.21 & 26.80 ± 4.60 & 4.80 ± 3.63 & 30.40 ± 6.84 & 23.60 ± 1.67 & 20.40 ± 9.10 & 16.00 ± 6.32  \\
+\midrule
+\multirow{6}{*}{\textbf{Perceptual}}
+& \textsc{TokenDrop} & \texttt{Context}  & 48.67 ± 4.58 & 85.11 ± 4.14 & 94.67 ± 3.00 & 3.11 ± 3.89 & \best{33.78 ± 5.33} & \best{31.56 ± 3.43} & 26.22 ± 2.11 & 16.00 ± 5.92 \\
+& \textsc{TokenDrop} & \texttt{Modul} & 34.44 ± 3.43 & 83.56 ± 8.59 & 86.00 ± 5.92 & 5.33 ± 4.24 & 28.22 ± 2.91 & 29.33 ± 3.00 & \best{28.44 ± 3.71} & \best{21.33 ± 5.29}\\
+& \textsc{TokenDrop} & \texttt{Expert}  & 54.22 ± 3.07 &\best{\textbf{87.56 ± 3.84}} & 91.78 ± 3.07 & 4.22 ± 5.70 & 26.67 ± 2.65 & 30.44 ± 4.45 & 18.44 ± 3.13 & 18.89 ± 4.48 \\
+
+& \textsc{FrameSamp} & \texttt{Context}  & 41.22 ± 4.27 & 72.00 ± 3.74 & 73.67 ± 11.08 & 13.67 ± 8.82 & 26.89 ± 5.28 & 30.22 ± 3.52 & 20.89 ± 2.94 & 15.22 ± 3.93 \\
+& \textsc{FrameSamp} & \texttt{Modul} & 39.56 ± 5.27 & 87.33 ± 2.45 & 92.00 ± 2.24 & \bestbest{\textbf{42.00 ± 11.36}} & 32.67 ± 3.16 & 25.11 ± 3.18 & 24.44 ± 6.06 & 18.22 ± 3.80 \\
+& \textsc{FrameSamp} & \texttt{Expert} &  \best{\textbf{57.33 ± 4.90}} & 86.22 ± 4.52 & \bestbest{\textbf{94.67 ± 2.45}} & 28.89 ± 9.33 & 31.78 ± 5.43 & 25.78 ± 3.38 & 22.89 ± 2.26 & 20.22 ± 3.07 \\
+\midrule
+\multirow{6}{*}{\textbf{Recurrent}}
+& TTT & \texttt{Context} & \best{\textbf{35.56 ± 5.64}} & 62.89 ± 8.01 & \best{\textbf{42.44 ± 7.44}} & 3.33 ± 2.65 & 29.78 ± 4.06 & \best{\textbf{22.89 ± 3.89}} & 18.44 ± 3.28 & 14.44 ± 5.90 \\
+& TTT & \texttt{Modul} & 34.22 ± 8.49 & \best{\textbf{65.11 ± 5.41}} & 36.67 ± 8.97 & 2.11 ± 2.83 & 27.22 ± 9.90 & 22.11 ± 1.41 & \best{\textbf{25.00 ± 12.73}} & 14.11 ± 2.83 \\
+& TTT & \texttt{Expert} & 34.89 ± 6.57 & 63.78 ± 6.12 & 41.33 ± 9.95 & 4.00 ± 3.46 & \best{\textbf{31.78 ± 6.12}} & 22.44 ± 3.13 & 19.56 ± 6.98 & \best{\textbf{18.00 ± 6.86}} \\
+& RMT & \texttt{Context} & 32.44 ± 7.77 & 56.89 ± 9.12 & 33.56 ± 7.99 & \best{\textbf{5.78 ± 5.52}} & 31.33 ± 7.87 & 10.89 ± 9.06 & 17.33 ± 5.48 & 2.00 ± 2.65 \\
+& RMT & \texttt{Modul} & 33.33 ± 5.00 & 60.78 ± 7.45 & 37.78 ± 6.20 & 4.67 ± 5.48 & 31.11 ± 5.21 & 11.78 ± 9.92 & 17.78 ± 3.38 & 2.44 ± 2.79 \\
+& RMT & \texttt{Expert} & 35.78 ± 7.90 & 60.22 ± 8.27 & 36.00 ± 8.34 & 5.56 ± 5.81 & 28.00 ± 3.16 & 17.11 ± 9.79 & 15.78 ± 5.52 & 2.00 ± 2.65 \\
+\midrule
+\multicolumn{3}{l}{DP-Unet \cite{chi2025diffusion}} & 32.00 ± 2.67 & 2.67 ± 3.56 & 6.67 ± 1.78 & 0.00 ± 0.00 & 16.00 ± 8.00 & 4.00 ± 2.67 & 4.00 ± 0.00 & 0.00 ± 0.00 \\
+\multicolumn{3}{l}{$\pi_{0.5}$ \cite{pi05}} & 30.00 ± 6.48 & 42.89 ± 6.41 & 35.56 ± 5.27 & \best{6.67 ± 5.20} & 20.44 ± 2.96 & 22.22 ± 10.22 & 18.67 ± 4.24 & 6.67 ± 4.12  \\
+\multicolumn{3}{l}{SAM2Act+ \cite{fang2025sam2act}} & 40.00 ± 5.29 & 76.00 ± 2.00 & 25.33 ± 1.15 & 0.00 ± 0.00 & 27.33 ± 1.15 & 32.00 ± 0.00 & 18.00 ± 5.29 & \bestbest{26.67 ± 1.15} \\
+\multicolumn{3}{l}{MemER \cite{sridhar2025memer}}  & \best{56.67 ± 3.06} & \best{79.33 ± 4.16} & \best{59.33 ± 8.33} & 0.00 ± 0.00 & \best{81.33 ± 3.06} & \bestbest{72.00 ± 3.46} & \bestbest{38.00 ± 0.00} & 21.33 ± 3.06\\
+
+\midrule\midrule
+
+% ===================== Block 2 header =====================
+\multirow{2}{*}{\textbf{Representation}} &
+\multirow{2}{*}{\textbf{Policy}} &
+\multirow{2}{*}{\makecell[l]{\textbf{Integration/}\\\textbf{VLM Type}}} &
+\multicolumn{4}{c}{\textbf{\TSthree}} &
+\multicolumn{4}{c}{\textbf{\TSfour}} \\
+\cmidrule(lr){4-7}\cmidrule(lr){8-11}
+& & &
+\textbf{PickHighlight} & \textbf{VideoRepick} & \textbf{VideoPlaceButton} & \textbf{VideoPlaceOrder} &
+\textbf{MoveCube} & \textbf{InsertPeg} & \textbf{PatternLock} & \textbf{RouteStick} \\
+\midrule
+
+
+% ===================== Block 2 body (BOTTOM part numbers) =====================
+
+\multirow{2}{*}{\textbf{Symbolic}}
+& \textsc{SimpleSG}  & \texttt{Oracle}  & 44.00 ± 4.69 & 27.78 ± 2.33  & 31.33 ± 4.90  & 26.00 ± 3.00 & 87.33 ± 3.46 & 10.00 ± 3.32 & 95.33 ± 2.24  & 55.11 ± 5.49  \\
+&  \textsc{GroundSG} & \texttt{Oracle}  & \best{\textbf{83.33 ± 5.99}} & \best{\textbf{97.33 ± 1.04}} & \best{\textbf{100.00 ± 0.00}} & \best{\textbf{100.00 ± 0.00}} & \best{\textbf{87.78 ± 4.83}} & \best{\textbf{15.56 ± 3.66}} & \best{\textbf{97.00 ± 2.62}} & \best{\textbf{55.56 ± 6.02 }}\\
+\midrule
+\multirow{4}{*}{\textbf{Symbolic}}
+& \textsc{SimpleSG} & \texttt{Gemini}  &  \best{20.00 ± 2.83} & 15.00 ± 1.41 & 26.00 ± 8.49 & 29.00 ± 7.07 & 61.00 ± 1.41 & \best{4.00 ± 0.00} & 7.00 ± 1.41 & 0.00 ± 0.00 \\
+& \textsc{SimpleSG} & \texttt{QwenVL}  & 17.11 ± 3.18 & 25.33 ± 3.74 & 33.33 ± 3.46 & 25.11 ± 4.81 & \best{82.00 ± 6.78} & 3.78 ± 1.56 & \best{12.67 ± 2.00} & \best{7.78 ± 3.07} \\
+&\textsc{GroundSG}  & \texttt{Gemini} & 9.00 ± 4.24 & 17.00 ± 1.41 & 12.00 ± 5.66 & 7.00 ± 1.41 & 17.00 ± 4.24 & 0.00 ± 0.00 & 7.00 ± 4.24 & 2.00 ± 0.00 \\
+& \textsc{GroundSG}  & \texttt{QwenVL}  & 15.11 ± 1.15 & \best{25.33 ± 1.15} & \best{54.00 ± 4.00} & \best{31.78 ± 1.15} & 71.56 ± 1.15 & 3.33 ± 1.15 & 6.67 ± 2.31 & 6.00 ± 2.00 \\
+% \cmidrule(){2-11}
+% & Action History & Input & 12.40 ± 3.85 & 8.80 ± 3.90 & 24.00 ± 4.47 & 18.80 ± 3.03 & 34.00 ± 7.35 & 0.80 ± 1.10 & 4.00 ± 3.16 & 5.60 ± 2.61 \\
+\midrule
+\multirow{6}{*}{\textbf{Perceptual}}
+& \textsc{TokenDrop} & \texttt{Context} & 20.67 ± 4.24 & 17.78 ± 2.11 & 31.11 ± 3.48 & 25.33 ± 5.20 & 81.33 ± 4.12 & 4.00 ± 3.32 & 12.67 ± 4.00 & 20.00 ± 3.16  \\
+& \textsc{TokenDrop} & \texttt{Modul} & 21.33 ± 5.83 & 22.00 ± 3.16 & 59.56 ± 2.40 & \bestbest{36.00 ± 3.61} & 62.00 ± 3.46 & 7.11 ± 3.33 & 32.44 ± 7.40 & 51.56 ± 6.62 \\
+& \textsc{TokenDrop} & \texttt{Expert} & 19.33 ± 3.00 & 20.89 ± 4.37 & 36.44 ± 2.96 & 24.67 ± 3.46 & \bestbest{\textbf{87.56 ± 6.77}} & 2.22 ± 1.86 & 16.22 ± 3.07 & 18.22 ± 4.94  \\
+& \textsc{FramSamp} & \texttt{Context} & 17.67 ± 2.83 & 15.22 ± 4.08 & 30.00 ± 4.68 & 20.89 ± 6.28 & 77.22 ± 7.87 & 1.22 ± 1.63 & 15.22 ± 2.34 & 19.67 ± 3.67  \\
+& \textsc{FramSamp} & \texttt{Modul} & \best{\textbf{22.89 ± 3.89}} & \bestbest{\textbf{30.44 ± 5.81}} & \bestbest{\textbf{60.00 ± 4.00}} & 32.00 ± 3.87 & 77.78 ± 3.80 & \bestbest{\textbf{7.56 ± 3.57}} & \bestbest{\textbf{53.56 ± 4.56}} & \bestbest{\textbf{66.67 ± 4.12}} \\
+& \textsc{FramSamp} & \texttt{Expert} & 19.11 ± 4.59 & 23.11 ± 5.75 & 30.00 ± 5.10 & 24.22 ± 4.29 & 83.11 ± 5.21 & 2.00 ± 2.00 & 13.56 ± 2.40 & 17.11 ± 2.26 \\
+\midrule
+\multirow{6}{*}{\textbf{Recurrent}}
+& TTT & \texttt{Context} & \best{\textbf{20.44 ± 6.15}} & \best{\textbf{13.11 ± 3.76}} & \best{\textbf{34.22 ± 8.33}} & 20.22 ± 5.04 & 32.44 ± 6.15 & 1.11 ± 1.05 & 1.56 ± 2.60 & 3.56 ± 2.96 \\
+& TTT & \texttt{Modul} & 14.56 ± 5.66 & 12.11 ± 2.83 & 32.67 ± 2.83 & 22.33 ± 1.21 & 31.22 ± 4.24 & 1.11 ± 1.41 & 3.56 ± 4.24 & 7.00 ± 1.41  \\
+& TTT & \texttt{Expert} & 12.22 ± 3.80 & 9.56 ± 3.43 & 34.00 ± 6.00 & 22.89 ± 4.59 & \best{\textbf{33.56 ± 6.06}} & 0.89 ± 1.05 & 3.11 ± 2.85 & 5.56 ± 3.28 \\
+& RMT & \texttt{Context} & 14.00 ± 5.66 & 3.78 ± 2.11 & 32.00 ± 8.06 & 29.11 ± 8.25 & 25.78 ± 8.60 & 2.00 ± 2.00 & \best{\textbf{5.56 ± 4.67}} & \best{\textbf{8.89 ± 2.85}} \\
+& RMT & \texttt{Modul} & 17.11 ± 3.33 & 4.22 ± 2.91 & 32.00 ± 4.24 & \best{\textbf{31.11 ± 6.72}} & 24.67 ± 3.32 & \best{\textbf{2.21 ± 2.00}} & 3.78 ± 4.18 & 8.00 ± 4.69  \\
+& RMT & \texttt{Expert} & 11.78 ± 3.53 & 0.22 ± 0.67 & 24.22 ± 3.80 & 22.67 ± 9.80 & 20.00 ± 5.39 & 1.89 ± 1.41 & 4.22 ± 3.80 & 4.89 ± 3.62 \\
+\midrule
+\multicolumn{3}{l}{DP-Unet \cite{chi2025diffusion}} & 0.00 ± 0.00 & 0.00 ± 0.00 & 22.00 ± 0.00 & 5.67 ± 3.11 & 8.67 ± 1.78 & 0.00 ± 0.00 & 2.00 ± 2.67 & 10.00 ± 0.00\\
+\multicolumn{3}{l}{$\pi_{0.5}$ \cite{pi05}}  & 11.33 ± 4.90 & 0.44 ± 0.88 & \best{31.11 ± 4.01} & 25.78 ± 1.86 & 26.00 ± 3.61 & 1.56 ± 1.94 & 2.89 ± 2.26 & 4.67 ± 2.45 \\
+\multicolumn{3}{l}{SAM2Act+ \cite{fang2025sam2act}}  & 17.33 ± 2.31 & 5.33 ± 2.31 & 24.67 ± 4.16 & 20.00 ± 2.00 & 29.33 ± 2.31 & 0.00 ± 0.00 & 0.00 ± 0.00 & 0.00 ± 0.00 \\
+\multicolumn{3}{l}{MemER \cite{sridhar2025memer}} & \bestbest{70.67 ± 4.16} & \best{25.33 ± 6.11} & 30.00 ± 3.46 & \best{26.00 ± 2.00} & \best{82.67 ± 3.06} & \best{6.67 ± 1.15} & \best{16.67 ± 1.15} & \best{12.00 ± 3.46} \\
+
+
+\bottomrule
+\end{tabular}
+}
+\vskip -0.1in
+
+\end{table*}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+% CVPR 2026 Paper Template; see https://github.com/cvpr-org/author-kit
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+%%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
+\PassOptionsToPackage{table}{xcolor}  % needed for colortbl; must come before cvpr loads xcolor
+\usepackage{cvpr}              % To produce the CAMERA-READY version
+% \usepackage[review]{cvpr}      % To produce the REVIEW version
+% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+
+% Import additional packages in the preamble file, before hyperref
+\input{preamble}
+
+% It is strongly recommended to use hyperref, especially for the review version.
+% hyperref with option pagebackref eases the reviewers' job.
+% Please disable hyperref *only* if you encounter grave issues,
+% e.g. with the file validation for the camera-ready version.
+%
+% If you comment hyperref and then uncomment it, you should delete *.aux before re-running LaTeX.
+% (Or just hit 'q' on the first LaTeX run, let it finish, and you should be clear).
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+\externaldocument[][nocite]{supplementary}
+
+%%%%%%%%% PAPER ID  - PLEASE UPDATE
+\def\paperID{30} % *** Enter the Paper ID here
+\def\confName{CVPR}
+\def\confYear{2026}
+
+%%%%%%%%% TITLE - PLEASE UPDATE
+\title{\benchname: Benchmarking and Understanding Memory for Robotic Generalist Policies}
+
+%%%%%%%%% AUTHORS - PLEASE UPDATE
+\author{
+Yinpei Dai\textsuperscript{1} \quad Hongze Fu\textsuperscript{1} \quad Jayjun Lee\textsuperscript{1} \quad Yuejiang Liu\textsuperscript{2} \quad Haoran Zhang\textsuperscript{1}\\
+Jianing Yang\textsuperscript{3} \quad Chelsea Finn\textsuperscript{2} \quad Nima Fazeli\textsuperscript{1,\textdagger} \quad Joyce Chai\textsuperscript{1,\textdagger}\\[2pt]
+\textsuperscript{1}University of Michigan \quad \textsuperscript{2}Stanford University \quad \textsuperscript{3}Figure AI\\
+{\tt\small \{daiyp, hongzefu, nfz, chaijy\}@umich.edu}\\
+\textsuperscript{\textdagger}Equal advising
+}
+
+\begin{document}
+\maketitle
+
+\input{sec/0_abstract}
+\input{sec/1_intro}
+\input{sec/2_related_work}
+\input{sec/3_benchmark}
+\input{sec/4_method}
+\input{sec/5_experiment}
+\input{sec/6_conclusion}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{main}
+}
+
+% WARNING: do not forget to delete the supplementary pages from your submission
+% \nolinenumbers
+% \input{sec/X_suppl}
+
+\end{document}
